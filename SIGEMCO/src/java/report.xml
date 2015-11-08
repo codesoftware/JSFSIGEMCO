@@ -1,0 +1,279 @@
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<!-- Author: nicolas -->
+ 
+<struts>
+    <package name="report" namespace="/" extends="struts-default">
+        <interceptors>
+            <interceptor name="iterceptorAtuenticacion" class="co.com.hotel.validadores.InterAutenticacion" />
+            <interceptor-stack name="secureStack">
+                <interceptor-ref name="iterceptorAtuenticacion" />
+                <interceptor-ref name="defaultStack" />
+            </interceptor-stack>
+        </interceptors>
+        <default-interceptor-ref name="secureStack" />
+
+        <global-results>
+            <result name="login" type="redirect">/inicio.jsp</result>
+            <result name="exception">/exception.jsp</result>
+        </global-results> 
+        
+        <!-- Acciones las cuales son repotes -->
+        <action name="Rep_GenerarFactura" class="co.com.hotel.action.reportes.Rep_ReporteAction" method="generarFactura" >
+            <param name="nombreJasper">Factura.jasper</param>
+            <result name="success" type="stream">
+                <!-- nombre del atributo del action que contiene el InputStream a devolver, por defecto se considera inputStream -->
+                <param name="inputName">fileInputStream</param>
+                <!-- nombre del atributo con el tamaño del fichero -->
+                <param name="contentLength">${contentLength}</param>
+                <!-- mime type del fichero, también se podría usar un atributo. Por defecto es text/plain -->
+                <param name="contentType">application/pdf</param>
+                <!-- el content disposition del header del response. En este ejemplo vamos a usar un valor fijo pero tomando como nombre
+                de archivo un atributo del action -->
+                <param name="contentDisposition">inline;filename="${contentName}"</param>
+                <!-- Por defecto es true y habilita el "cacheo" del fichero en el navegador. Si este puede ser variable conviene deshabilitarlo
+                para evitar posibles efectos colaterales -->
+                <param name="allowCaching">false</param><!-- default true -->
+            </result>
+        </action> 
+        <action name="adm_usuariosRep" class="co.com.hotel.action.reportes.Rep_ReporteUsuario" method="generarReporteUsuario" >
+            <param name="nombreJasper">Usuarios.jasper</param>
+            <result name="success" type="stream">
+                <!-- nombre del atributo del action que contiene el InputStream a devolver, por defecto se considera inputStream -->
+                <param name="inputName">fileInputStream</param>
+                <!-- nombre del atributo con el tamaño del fichero -->
+                <param name="contentLength">${contentLength}</param>
+                <!-- mime type del fichero, también se podría usar un atributo. Por defecto es text/plain -->
+                <param name="contentType">application/pdf</param>
+                <!-- el content disposition del header del response. En este ejemplo vamos a usar un valor fijo pero tomando como nombre
+                de archivo un atributo del action -->
+                <param name="contentDisposition">inline;filename="${contentName}"</param>
+                <!-- Por defecto es true y habilita el "cacheo" del fichero en el navegador. Si este puede ser variable conviene deshabilitarlo
+                para evitar posibles efectos colaterales -->
+                <param name="allowCaching">false</param><!-- default true -->
+            </result>
+        </action>
+        <action name="inv_stickeProd" class="co.com.sigemco.alfa.inventario.reporte.ProductoSticker" method="generarStiker" >
+            <param name="nombreJasper">codigo.jasper</param>
+            <result name="success" type="stream">
+                <!-- nombre del atributo del action que contiene el InputStream a devolver, por defecto se considera inputStream -->
+                <param name="inputName">fileInputStream</param>
+                <!-- nombre del atributo con el tamaño del fichero -->
+                <param name="contentLength">${contentLength}</param>
+                <!-- mime type del fichero, también se podría usar un atributo. Por defecto es text/plain -->
+                <param name="contentType">application/pdf</param>
+                <!-- el content disposition del header del response. En este ejemplo vamos a usar un valor fijo pero tomando como nombre
+                de archivo un atributo del action -->
+                <param name="contentDisposition">inline;filename="${contentName}"</param>
+                <!-- Por defecto es true y habilita el "cacheo" del fichero en el navegador. Si este puede ser variable conviene deshabilitarlo
+                para evitar posibles efectos colaterales -->
+                <param name="allowCaching">false</param><!-- default true -->
+            </result>
+        </action>
+        
+        <action name="inv_reporteConteo" class="co.com.sigemco.alfa.inventario.reporte.ConteoReporte" method="generaReporteConteo" >
+            <param name="nombreJasper">ReporteConteoFinal.jasper</param>
+            <result name="success" type="stream">
+                <!-- nombre del atributo del action que contiene el InputStream a devolver, por defecto se considera inputStream -->
+                <param name="inputName">fileInputStream</param>
+                <!-- nombre del atributo con el tamaño del fichero -->
+                <param name="contentLength">${contentLength}</param>
+                <!-- mime type del fichero, también se podría usar un atributo. Por defecto es text/plain -->
+                <param name="contentType">application/pdf</param>
+                <!-- el content disposition del header del response. En este ejemplo vamos a usar un valor fijo pero tomando como nombre
+                de archivo un atributo del action -->
+                <param name="contentDisposition">inline;filename="${contentName}"</param>
+                <!-- Por defecto es true y habilita el "cacheo" del fichero en el navegador. Si este puede ser variable conviene deshabilitarlo
+                para evitar posibles efectos colaterales -->
+                <param name="allowCaching">false</param><!-- default true -->
+            </result>
+        </action>
+        
+        <action name="inv_stickerRemision" class="co.com.sigemco.alfa.inventario.reporte.RemisionSticker" method="generarStiker" >
+            <param name="nombreJasper">codigoBarrasRem.jasper</param>
+            <result name="success" type="stream">
+                <!-- nombre del atributo del action que contiene el InputStream a devolver, por defecto se considera inputStream -->
+                <param name="inputName">fileInputStream</param>
+                <!-- nombre del atributo con el tamaño del fichero -->
+                <param name="contentLength">${contentLength}</param>
+                <!-- mime type del fichero, también se podría usar un atributo. Por defecto es text/plain -->
+                <param name="contentType">application/pdf</param>
+                <!-- el content disposition del header del response. En este ejemplo vamos a usar un valor fijo pero tomando como nombre
+                de archivo un atributo del action -->
+                <param name="contentDisposition">inline;filename="${contentName}"</param>
+                <!-- Por defecto es true y habilita el "cacheo" del fichero en el navegador. Si este puede ser variable conviene deshabilitarlo
+                para evitar posibles efectos colaterales -->
+                <param name="allowCaching">false</param><!-- default true -->
+            </result>
+        </action>
+        <action name="inv_ReporteCierre" class="co.com.sigemco.alfa.contabilidad.action.CierreDiarioAction" method="generarReporte" >
+            <param name="nombreJasper">ReportCierreDiario.jasper</param>
+            <result name="success" type="stream">
+                <!-- nombre del atributo del action que contiene el InputStream a devolver, por defecto se considera inputStream -->
+                <param name="inputName">fileInputStream</param>
+                <!-- nombre del atributo con el tamaño del fichero -->
+                <param name="contentLength">${contentLength}</param>
+                <!-- mime type del fichero, también se podría usar un atributo. Por defecto es text/plain -->
+                <param name="contentType">application/pdf</param>
+                <!-- el content disposition del header del response. En este ejemplo vamos a usar un valor fijo pero tomando como nombre
+                de archivo un atributo del action -->
+                <param name="contentDisposition">inline;filename="${contentName}"</param>
+                <!-- Por defecto es true y habilita el "cacheo" del fichero en el navegador. Si este puede ser variable conviene deshabilitarlo
+                para evitar posibles efectos colaterales -->
+                <param name="allowCaching">false</param><!-- default true -->
+            </result>
+        </action>
+        
+        <action name="con_MoviContables" class="co.com.sigemco.alfa.contabilidad.reporte.MovimientoContable" method="generarReporteMovCont" >
+            <param name="nombreJasper">MovimientosContables.jasper</param>
+            <result name="success" type="stream">
+                <!-- nombre del atributo del action que contiene el InputStream a devolver, por defecto se considera inputStream -->
+                <param name="inputName">fileInputStream</param>
+                <!-- nombre del atributo con el tamaño del fichero -->
+                <param name="contentLength">${contentLength}</param>
+                <!-- mime type del fichero, también se podría usar un atributo. Por defecto es text/plain -->
+                <param name="contentType">application/vnd.ms-excel</param>
+                <param name="format">XLS</param>
+                <!-- el content disposition del header del response. En este ejemplo vamos a usar un valor fijo pero tomando como nombre
+                de archivo un atributo del action -->
+                <param name="contentDisposition">inline;filename="${contentName}"</param>
+                <!-- Por defecto es true y habilita el "cacheo" del fichero en el navegador. Si este puede ser variable conviene deshabilitarlo
+                para evitar posibles efectos colaterales -->
+                <param name="allowCaching">false</param><!-- default true -->
+            </result>
+        </action>
+        <action name="con_Reportes" class="co.com.sigemco.alfa.inventario.reporte.ProductoSticker" method="generarRepGenProd" >
+            <param name="nombreJasper">kardexGeneral.jasper</param>
+            <result name="success" type="stream">
+                <!-- nombre del atributo del action que contiene el InputStream a devolver, por defecto se considera inputStream -->
+                <param name="inputName">fileInputStream</param>
+                <!-- nombre del atributo con el tamaño del fichero -->
+                <param name="contentLength">${contentLength}</param>
+                <!-- mime type del fichero, también se podría usar un atributo. Por defecto es text/plain -->
+                <param name="contentType">application/vnd.ms-excel</param>
+                <param name="format">XLS</param>
+                <!-- el content disposition del header del response. En este ejemplo vamos a usar un valor fijo pero tomando como nombre
+                de archivo un atributo del action -->
+                <param name="contentDisposition">inline;filename="${contentName}"</param>
+                <!-- Por defecto es true y habilita el "cacheo" del fichero en el navegador. Si este puede ser variable conviene deshabilitarlo
+                para evitar posibles efectos colaterales -->
+                <param name="allowCaching">false</param><!-- default true -->
+            </result>
+        </action>
+        <action name="inv_ReportePromPonXProd" class="co.com.sigemco.alfa.inventario.reporte.ProductoSticker" method="generarRepKardexPromPond" >
+            <param name="nombreJasper">PromedioPonderadoBasico.jasper</param>
+            <result name="success" type="stream">
+                <param name="redirect">/WEB-INF/ACCIONES/REPORTES/JSP/inv_reportInvPdf.jsp</param>
+                <!-- nombre del atributo del action que contiene el InputStream a devolver, por defecto se considera inputStream -->
+                <param name="inputName">fileInputStream</param>
+                <!-- nombre del atributo con el tamaño del fichero -->
+                <param name="contentLength">${contentLength}</param>
+                <!-- mime type del fichero, también se podría usar un atributo. Por defecto es text/plain -->
+                <param name="contentType">application/pdf</param>
+                <!-- el content disposition del header del response. En este ejemplo vamos a usar un valor fijo pero tomando como nombre
+                de archivo un atributo del action -->
+                <param name="contentDisposition">inline;filename="${contentName}"</param>
+                <!-- Por defecto es true y habilita el "cacheo" del fichero en el navegador. Si este puede ser variable conviene deshabilitarlo
+                para evitar posibles efectos colaterales -->
+                <param name="allowCaching">false</param><!-- default true -->
+            </result>
+        </action>
+        <action name="inv_prodGeneral" class="co.com.sigemco.alfa.inventario.reporte.ProductoReporte" method="generaReporteProducto" >
+            <param name="nombreJasper">ProductoReport.jasper</param>
+            <result name="success" type="stream">
+                <!-- nombre del atributo del action que contiene el InputStream a devolver, por defecto se considera inputStream -->
+                <param name="inputName">fileInputStream</param>
+                <!-- nombre del atributo con el tamaño del fichero -->
+                <param name="contentLength">${contentLength}</param>
+                <!-- mime type del fichero, también se podría usar un atributo. Por defecto es text/plain -->
+                <param name="contentType">application/vnd.ms-excel</param>
+                <param name="format">XLS</param>
+                <!-- el content disposition del header del response. En este ejemplo vamos a usar un valor fijo pero tomando como nombre
+                de archivo un atributo del action -->
+                <param name="contentDisposition">inline;filename="${contentName}"</param>
+                <!-- Por defecto es true y habilita el "cacheo" del fichero en el navegador. Si este puede ser variable conviene deshabilitarlo
+                para evitar posibles efectos colaterales -->
+                <param name="allowCaching">false</param><!-- default true -->
+            </result>
+        </action>
+        <!-- Conteo en excel-->
+        <action name="inv_prodGeneralXls" class="co.com.sigemco.alfa.inventario.reporte.ConteoReporte" method="generaReporteConteoXsl" >
+            <param name="nombreJasper">ReporteConteoFinal.jasper</param>
+            <result name="success" type="stream">
+                <!-- nombre del atributo del action que contiene el InputStream a devolver, por defecto se considera inputStream -->
+                <param name="inputName">fileInputStream</param>
+                <!-- nombre del atributo con el tamaño del fichero -->
+                <param name="contentLength">${contentLength}</param>
+                <!-- mime type del fichero, también se podría usar un atributo. Por defecto es text/plain -->
+                <param name="contentType">application/vnd.ms-excel</param>
+                <param name="format">XLS</param>
+                <!-- el content disposition del header del response. En este ejemplo vamos a usar un valor fijo pero tomando como nombre
+                de archivo un atributo del action -->
+                <param name="contentDisposition">inline;filename="${contentName}"</param>
+                <!-- Por defecto es true y habilita el "cacheo" del fichero en el navegador. Si este puede ser variable conviene deshabilitarlo
+                para evitar posibles efectos colaterales -->
+                <param name="allowCaching">false</param><!-- default true -->
+            </result>
+        </action>
+        <!--Reporte para la generacion del reporte de existencias de productos-->
+        <action name="reportBasicosInv" class="co.com.sigemco.alfa.inventario.reporte.ProductoReporte" method="reportBasicosInv" >
+            <param name="nombreJasper">ExsistenciasProductosReport.jasper</param>
+            <result name="success" type="stream">
+                <!-- nombre del atributo del action que contiene el InputStream a devolver, por defecto se considera inputStream -->
+                <param name="inputName">fileInputStream</param>
+                <!-- nombre del atributo con el tamaño del fichero -->
+                <param name="contentLength">${contentLength}</param>
+                <!-- mime type del fichero, también se podría usar un atributo. Por defecto es text/plain -->
+                <param name="contentType">application/vnd.ms-excel</param>
+                <param name="format">XLS</param>
+                <!-- el content disposition del header del response. En este ejemplo vamos a usar un valor fijo pero tomando como nombre
+                de archivo un atributo del action -->
+                <param name="contentDisposition">inline;filename="${contentName}"</param>
+                <!-- Por defecto es true y habilita el "cacheo" del fichero en el navegador. Si este puede ser variable conviene deshabilitarlo
+                para evitar posibles efectos colaterales -->
+                <param name="allowCaching">false</param><!-- default true -->
+            </result>
+        </action>
+        <!--Reporte de cierre por medio de un Excel-->
+        <action name="inv_ReporteCierreExcel" class="co.com.sigemco.alfa.contabilidad.action.CierreDiarioAction" method="generarReporteExcel" >
+            <param name="nombreJasper">ReportCierreDiario.jasper</param>
+            <result name="success" type="stream">
+                <!-- nombre del atributo del action que contiene el InputStream a devolver, por defecto se considera inputStream -->
+                <param name="inputName">fileInputStream</param>
+                <!-- nombre del atributo con el tamaño del fichero -->
+                <param name="contentLength">${contentLength}</param>
+                <!-- mime type del fichero, también se podría usar un atributo. Por defecto es text/plain -->
+                <param name="contentType">application/vnd.ms-excel</param>
+                <param name="format">XLS</param>
+                <!-- el content disposition del header del response. En este ejemplo vamos a usar un valor fijo pero tomando como nombre
+                de archivo un atributo del action -->
+                <param name="contentDisposition">inline;filename="${contentName}"</param>
+                <!-- Por defecto es true y habilita el "cacheo" del fichero en el navegador. Si este puede ser variable conviene deshabilitarlo
+                para evitar posibles efectos colaterales -->
+                <param name="allowCaching">false</param><!-- default true -->
+            </result>
+        </action>
+        <!--Reporte de cierre por medio de un Excel-->
+        <action name="inv_ReporteCierreDetalladoExcel" class="co.com.sigemco.alfa.contabilidad.action.CierreDiarioAction" method="generarReporteDetalladoExcel" >
+            <param name="nombreJasper">reporteCierreDetalleProducto.jasper</param>
+            <result name="success" type="stream">
+                <!-- nombre del atributo del action que contiene el InputStream a devolver, por defecto se considera inputStream -->
+                <param name="inputName">fileInputStream</param>
+                <!-- nombre del atributo con el tamaño del fichero -->
+                <param name="contentLength">${contentLength}</param>
+                <!-- mime type del fichero, también se podría usar un atributo. Por defecto es text/plain -->
+                <param name="contentType">application/vnd.ms-excel</param>
+                <param name="format">XLS</param>
+                <!-- el content disposition del header del response. En este ejemplo vamos a usar un valor fijo pero tomando como nombre
+                de archivo un atributo del action -->
+                <param name="contentDisposition">inline;filename="${contentName}"</param>
+                <!-- Por defecto es true y habilita el "cacheo" del fichero en el navegador. Si este puede ser variable conviene deshabilitarlo
+                para evitar posibles efectos colaterales -->
+                <param name="allowCaching">false</param><!-- default true -->
+            </result>
+        </action>
+    </package>   
+    <!-- Add your configuration elements here -->
+</struts>

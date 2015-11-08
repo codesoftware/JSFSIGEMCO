@@ -1,0 +1,82 @@
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    
+    <!--<constant name="struts.devMode" value="true"/>  Etiqueta usada para que se recargue el struts.xml por cada accion realizada-->
+    <!--<constant name="struts.action.extension" value="html"/>-->
+    <package name="ajax" namespace="/" extends="struts-default">  
+        <interceptors>
+            <interceptor name="iterceptorAtuenticacion" class="co.com.hotel.validadores.InterAutenticacion" />
+            <interceptor-stack name="secureStack">
+                <interceptor-ref name="iterceptorAtuenticacion" />
+                <interceptor-ref name="defaultStack" />
+            </interceptor-stack>
+        </interceptors>
+        <default-interceptor-ref name="secureStack" />
+        <global-results>
+            <result name="login" type="redirect">/inicio.jsp</result>
+            <result name="exception">/exception.jsp</result>
+        </global-results>         
+        <global-exception-mappings>
+            <exception-mapping exception="java.sql.SQLException" result="exception"/>
+            <exception-mapping exception="java.lang.Exception" result="exception"/>
+            <exception-mapping exception="java.io.IOException" result="exception"/>
+        </global-exception-mappings> 
+        <action name="consultaComboGrupo" class="co.com.sigemco.alfa.contabilidad.ajax.AjaxControllerCombos" method="consultaComboGrupo">
+        </action>        
+        <action name="consultaComboCuenta" class="co.com.sigemco.alfa.contabilidad.ajax.AjaxControllerCombos" method="consultaComboCuenta">
+        </action>    
+        <action name="consultaSubCuentaXCodigo" class="co.com.sigemco.alfa.contabilidad.ajax.AjaxControllerCombos" method="consultaSubCuentas">
+        </action>       
+        <action name="consultaProdIXcod" class="co.com.sigemco.alfa.inventario.ajax.ajaxControllerProducto" method="consultaProductoPorCodigo">
+        </action>
+        <action name="actualizaConteoProd" class="co.com.sigemco.alfa.inventario.ajax.ajaxControllerProducto" method="actualizaConteoProducto">
+        </action>
+        <action name="cierraConteo" class="co.com.sigemco.alfa.inventario.ajax.ajaxControllerProducto" method="cierraConteo">
+        </action>
+        <action name="actualizaInicioConteo" class="co.com.sigemco.alfa.inventario.ajax.ajaxControllerProducto" method="actualizaInicioConteo">
+        </action>
+        <action name="adicionaProductoFactura" class="co.com.sigemco.alfa.inventario.ajax.ajaxControllerProducto" method="adicionaProductoFactura">
+        </action>
+        <action name="simulaDetalleServicioFactura" class="co.com.sigemco.alfa.inventario.ajax.ajaxControllerProducto" method="simulaDetalleServicioFactura">
+        </action>
+        <action name="buscaSimilaresProd" class="co.com.sigemco.alfa.inventario.ajax.ajaxControllerProducto" method="buscaProductossimilares">
+        </action>
+        <action name="buscaProdConteo" class="co.com.sigemco.alfa.inventario.ajax.ajaxControllerProducto" method="buscaProductoConteo">
+        </action>
+        <action name="buscaDatosEditarSubcuenta" class="co.com.sigemco.alfa.contabilidad.ajax.AjaxSubCuentaAction" method="verificaEdicionSubcuenta">
+        </action>
+        <action name="actualizaSbcu" class="co.com.sigemco.alfa.contabilidad.ajax.AjaxSubCuentaAction" method="actualizaSubCuenta">
+        </action>
+        <action name="buscaProductoXCodigo" class="co.com.sigemco.alfa.inventario.ajax.ajaxControllerProducto" method="buscaProductoXCodigo">
+        </action>
+        <action name="cambiarEstadoProducto" class="co.com.sigemco.alfa.inventario.ajax.ajaxControllerProducto" method="cambiarEstadoProducto">
+        </action>
+        <!--Recetas-->
+        <action name="addProdReceta" class="co.com.sigemco.alfa.inventario.ajax.AjaxRecetasAction" method="adicionaProductoReceta">
+        </action>
+        <action name="consultaProductosReceta" class="co.com.sigemco.alfa.inventario.ajax.AjaxRecetasAction" method="buscaProductosReceta">
+        </action>
+        <action name="eliminaProductoReceta" class="co.com.sigemco.alfa.inventario.ajax.AjaxRecetasAction" method="eliminaProductoReceta">
+        </action>
+        <action name="buscaRecetaXCodigo" class="co.com.sigemco.alfa.inventario.ajax.AjaxRecetasAction" method="buscaRecetaXCodigo">
+        </action>
+        <!-- Fin Recetas -->
+        <action name="eliminaItemPantallaPrincipal" class="co.com.sigemco.alfa.inventario.ajax.AjaxRecetasAction" method="eliminaItemPantallaPrincipal">
+        </action>
+        <action name="buscaParametroInicio" class="co.com.sigemco.alfa.admin.ajax.AjaxAdministracionAction" method="buscaParametroInicio">
+        </action>
+        <action name="buscaProductosInicio" class="co.com.sigemco.alfa.admin.ajax.AjaxAdministracionAction" method="buscaProductosInicio">
+        </action>
+        <!--Inicio Cancelacion Facturacion Facturacion -->
+        <action name="buscaFacturaXId" class="co.com.sigemco.alfa.facturacion.ajax.AjaxCancelaFacturaAction" method="buscaFacturaXId">
+        </action>
+        <!--Fin Cancelacion Facturacion Facturacion -->        
+        <!--Ini Busca Iva para las compras -->
+        <action name="buscaIvaCompras" class="co.com.sigemco.alfa.admin.ajax.AjaxAdministracionAction" method="buscaIvaCompras">
+        </action>
+        <!--Fin -->
+    </package>
+</struts>

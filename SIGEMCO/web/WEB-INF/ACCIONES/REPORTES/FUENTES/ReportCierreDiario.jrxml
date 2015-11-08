@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="034a0dfe-4562-43ad-8af9-9666f7cca274">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<parameter name="FECHA" class="java.lang.String"/>
+	<parameter name="SEDE" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/opt/Servidores/apache-tomcat-8.0.23/webapps/SIGEMCO/WEB-INF/ACCIONES/REPORTES/FUENTES/"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT fact_fact FACTURA ,tius_usuario,'$'||to_char((fact_vlr_total + fact_vlr_iva-fact_vlr_dcto),'999,999,999.99') TOTAL,
+CASE WHEN  FACT_TIPO_PAGO = 'E' THEN 'EFECTIVO'
+WHEN FACT_TIPO_PAGO = 'M' THEN 'MIXTO'
+ELSE 
+'TARJETA'
+END TIPOPAGO,
+to_char(fact_vlr_dcto,'9,999,999,999.00') DESCUENTO,
+to_char(fact_vlr_efectivo,'9,999,999,999.00') VLR_EFECTIVO,
+to_char(fact_vlr_tarjeta,'9,999,999,999.00')  VLR_TARJETA,
+fact_cierre
+FROM fa_tfact, us_ttius
+where fact_tius = tius_tius
+AND fact_cierre = (SELECT cier_cier FROM ad_tcier WHERE cier_sede = cast($P{SEDE} as int) AND cast(cier_fech as date) = to_date($P{FECHA}, 'dd/mm/yyyy') )]]>
+	</queryString>
+	<field name="factura" class="java.lang.Integer"/>
+	<field name="tius_usuario" class="java.lang.String"/>
+	<field name="total" class="java.lang.String"/>
+	<field name="tipopago" class="java.lang.String"/>
+	<field name="descuento" class="java.lang.String"/>
+	<field name="vlr_efectivo" class="java.lang.String"/>
+	<field name="vlr_tarjeta" class="java.lang.String"/>
+	<field name="fact_cierre" class="java.lang.Integer">
+		<fieldDescription><![CDATA[Referencia el id del cierre en el cual fue realizado la factura]]></fieldDescription>
+	</field>
+	<title>
+		<band height="140" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="802" height="40" uuid="c5403aa5-59bd-41ee-ad87-b549af9c5575"/>
+				<textElement textAlignment="Center">
+					<font size="30" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REPORTE CIERRE  DIARIO]]></text>
+			</staticText>
+			<subreport>
+				<reportElement x="0" y="40" width="802" height="100" uuid="6fa70964-0ff5-47af-9a53-f027c1989fc9"/>
+				<subreportParameter name="CIER_FECHA">
+					<subreportParameterExpression><![CDATA[$P{FECHA}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="CIER_CIER">
+					<subreportParameterExpression><![CDATA[$F{fact_cierre}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "SubReporteCierreDiario1.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="30">
+			<staticText>
+				<reportElement x="1" y="0" width="114" height="30" uuid="f7bf3d18-fd22-4845-91a9-77b6455c0f88"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ID FACT .  ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="114" y="0" width="114" height="30" uuid="d63ba16c-13d1-44fb-aa41-7cc6922b8393"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FACTURO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="228" y="0" width="114" height="30" uuid="79f54c2e-61ba-49aa-8180-23cc868feb6b"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL FACT.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="342" y="0" width="114" height="30" uuid="21e0273f-1d66-4e50-bcc6-f703658df0e5"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TIPO PAGO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="456" y="0" width="114" height="30" uuid="cdf0c2a4-1a05-4ff3-9e25-bd017c043b7f"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DESCUENTO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="570" y="0" width="114" height="30" uuid="1ba0ac4b-b34b-4013-8508-0db60f6a0cbd"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VLR. EFECTIVO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="684" y="0" width="114" height="30" uuid="644a7e85-4198-4175-92e3-8346ed0b825d"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VLR. TARJETA]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="114" height="20" uuid="a878c9b4-decc-47e8-9f06-1a2c27603e57"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{factura}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="114" y="0" width="114" height="20" uuid="d19fac8d-6f89-4cf1-92bf-dff903d1ec4c"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{tius_usuario}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="228" y="0" width="114" height="20" uuid="5d158084-1b37-4e17-81b0-6b2dc40470a3"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="342" y="0" width="114" height="20" uuid="7a6e92ac-4956-427c-8425-d22f95790cc1"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{tipopago}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="456" y="0" width="114" height="20" uuid="ea4b5f6f-a0ab-4c8f-8203-a568439fd96f"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{descuento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="570" y="0" width="114" height="20" uuid="4a48f517-7833-4be8-ad65-ff35356f4c37"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{vlr_efectivo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="684" y="0" width="114" height="20" uuid="8455b7d2-7f08-4fe7-a770-76b2f30ca1e5"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{vlr_tarjeta}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

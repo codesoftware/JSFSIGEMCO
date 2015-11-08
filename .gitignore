@@ -1,0 +1,56 @@
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# Windows shortcuts
+*.lnk
+
+# =========================
+# Operating System Files
+# =========================
+
+# OSX
+# =========================
+
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Thumbnails
+._*
+
+# Files that might appear on external disk
+.Spotlight-V100
+.Trashes
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+build.xml
+SIGEMCO/nbproject/ant-deploy.xml
+SIGEMCO/nbproject/build-impl.xml
+SIGEMCO/nbproject/project.xml
+SIGEMCO/nbproject/project.properties
+SIGEMCO/nbproject/private/private.xml
+SIGEMCO/nbproject/private/private.properties
+SIGEMCO/nbproject/genfiles.properties
+SIGEMCO/build/
+SIGEMCO/dist/
+SIGEMCO/src/java/struts_2.xml
+SIGEMCO/nbproject/private/profiler/configurations.xml
+*.class
