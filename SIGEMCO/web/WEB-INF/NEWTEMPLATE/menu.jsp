@@ -349,6 +349,10 @@
 
         <!-- Right nav -->
         <ul class="nav navbar-nav navbar-right">
+            <li><a href="#" aria-label="Left Align" onclick="nuevoSigemco();">
+                    <span class="glyphicon glyphicon-new-window" ></span>&nbsp;NSIGEMCO
+                </a>             
+            </li>
             <li><a href="logout.action" aria-label="Left Align">
                     <span class="glyphicon glyphicon-off" ></span>&nbsp;Salir
                 </a>             
@@ -359,5 +363,11 @@
         function irInicio() {
             location.href = RutaSitio + '/inicioAdmin.action';
         }
+        function nuevoSigemco(){
+            document.getElementById('redirectNewSigemco').submit();
+        }
     </script>
+    <form method="POST" action="<s:text name="nuevoSigemco.url"/>" id="redirectNewSigemco" >
+        <input type="hidden" value="usuario" name="usuario"/>
+    </form>
 </div>
