@@ -364,10 +364,22 @@
             location.href = RutaSitio + '/inicioAdmin.action';
         }
         function nuevoSigemco(){
+            var igualPuerto = '<s:text name="nuevoSigemco.url"/>';
+            var puerto = '';
+            var ubicacion =  location;
+            var host = location.hostname;
+            var aplication = '/NSIGEMCO/index.jsf';
+            if(igualPuerto == 'NO'){
+                puerto = '<s:text name="nuevoSigemco.puerto"/>';
+            }else{
+                puerto = location.port;
+            }
+            var ruta = "http://"+ host + ":" + puerto + aplication;
+            document.getElementById('redirectNewSigemco').action = ruta;
             document.getElementById('redirectNewSigemco').submit();
         }
     </script>
     <form method="POST" action="<s:text name="nuevoSigemco.url"/>" id="redirectNewSigemco" >
-        <input type="hidden" value="usuario" name="usuario"/>
+        <input type="hidden" value="<%=usuario.getUsuario()%>" name="usuario"/>
     </form>
 </div>
