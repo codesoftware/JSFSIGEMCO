@@ -40,6 +40,7 @@ public class ajaxControllerProducto extends ActionSupport implements SessionAwar
     private String dska_marca;
     private String dska_cate;
     private String dska_estado;
+    private String fecha;
 
     /**
      * Funcion encargada de realizar la accion de consulta de productos por
@@ -156,7 +157,7 @@ public class ajaxControllerProducto extends ActionSupport implements SessionAwar
     public void simulaDetalleServicioFactura() {
         DetFactServicioLogica objLogica = null;
         try {
-            objLogica = new DetFactServicioLogica();
+             objLogica = new DetFactServicioLogica();
             DetFactServicoDto obj = objLogica.simulaFacturacionServicio(cantidad, dsha_dsha);
             Map rta = new HashMap<String, Object>();
             if (obj == null) {
@@ -164,6 +165,7 @@ public class ajaxControllerProducto extends ActionSupport implements SessionAwar
             } else {
                 rta.put("respuesta", "Ok");
                 rta.put("Objeto", obj);
+                rta.put("fechaReserv", fecha);
             }
             Gson gson = new Gson();
             String objJson = "";
@@ -268,9 +270,9 @@ public class ajaxControllerProducto extends ActionSupport implements SessionAwar
             rta = new HashMap<>();
             ProductoLogica objLogica = new ProductoLogica();
             String respuesta = objLogica.cambiaEstadoProducto(dska_dska, dska_estado);
-            if("Ok".equalsIgnoreCase(respuesta)){
+            if ("Ok".equalsIgnoreCase(respuesta)) {
                 rta.put("respuesta", "Ok");
-            }else{
+            } else {
                 rta.put("respuesta", respuesta);
             }
             objJson = gson.toJson(rta);
@@ -367,6 +369,14 @@ public class ajaxControllerProducto extends ActionSupport implements SessionAwar
 
     public void setDska_estado(String dska_estado) {
         this.dska_estado = dska_estado;
+    }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
     }
 
 }

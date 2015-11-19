@@ -54,5 +54,27 @@ function sumaValoresTotales() {
         sumaTotalAPagar += aux;
     });
     $('#sumtotalAPagar').html(sumaTotalAPagar);
-    
+
+}
+
+//Funcion con la cual se factura completo
+function generarFactura() {
+    var servicios = document.getElementsByClassName('reservUsua');
+    var datos = '[';
+    for (var i = 0; i < servicios.length; i++) {
+        var id = servicios[i].value;
+        var fecha = servicios[i].dataset.dias;
+        var dias = servicios[i].dataset.dias;
+        if(i != 0){
+            datos += ',{';
+        }else{
+            datos += '{';
+        }
+        datos += " \"id\" : \""+id+"\",";
+        datos += " \"fecha\" : \""+fecha+"\",";
+        datos += " \"dias\" : \""+dias+"\" ";
+        datos += '}';
+    }
+    datos += "]";
+    $('#serviceJson').val(datos);
 }

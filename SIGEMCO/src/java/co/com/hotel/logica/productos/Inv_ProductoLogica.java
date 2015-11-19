@@ -57,8 +57,15 @@ public class Inv_ProductoLogica {
         return rtaFun;
     }
 
+    /**
+     * Funcion con la cual se buscan los productos por medio de un filtro
+     *
+     * @param obj
+     * @param sede
+     * @return
+     */
     public ArrayList<Producto> buscaProductosXFiltro(Producto obj, String sede) {
-        if(sede == null ){
+        if (sede == null) {
             sede = "1";
         }
         ArrayList<Producto> r = null;
@@ -74,7 +81,7 @@ public class Inv_ProductoLogica {
             sql += " and prpr_dska = dska_dska ";
             sql += " and marca_marca = dska_marca ";
             sql += " and dska_refe = refe_refe ";
-            sql += " and prpr_sede = "+sede+ " ";
+            sql += " and prpr_sede = " + sede + " ";
             if (obj.getCodigo() != null & !"".equalsIgnoreCase(obj.getCodigo())) {
                 sql += " and dska_cod = '" + obj.getCodigo().trim() + "'\n";
             }
@@ -114,9 +121,9 @@ public class Inv_ProductoLogica {
         }
         return r;
     }
-    
-     public ArrayList<Producto> buscaProductosXFiltro2(Producto obj, String sede) {
-        if(sede == null ){
+
+    public ArrayList<Producto> buscaProductosXFiltro2(Producto obj, String sede) {
+        if (sede == null) {
             sede = "1";
         }
         ArrayList<Producto> r = null;
@@ -170,7 +177,6 @@ public class Inv_ProductoLogica {
         }
         return r;
     }
-
 
     /**
      * Funcion encargada de buscar un producto por el codigo del producto
@@ -291,8 +297,8 @@ public class Inv_ProductoLogica {
             sql += "and kapr_fecha between to_date('" + fechaIni + "','dd/mm/yyyy') and to_date('" + fechaFin + "','dd/mm/yyyy') \n";
             sql += "and kapr_sede = sede_sede    ";
             sql += "order by kapr_cons_pro asc                             \n";
-            
-            System.out.println("sqlito"+sql);
+
+            System.out.println("sqlito" + sql);
             rs = function.enviarSelect(sql);
             while (rs.next()) {
                 if (cont == 0) {
@@ -487,8 +493,7 @@ public class Inv_ProductoLogica {
         }
         return rta;
     }
-    
-    
+
     public ArrayList<Producto> buscaProductosXFiltroKardex(Producto obj) {
         ArrayList<Producto> r = null;
         EnvioFunction function = new EnvioFunction();
@@ -512,7 +517,7 @@ public class Inv_ProductoLogica {
             if (obj.getReferencia() != null && !"".equalsIgnoreCase(obj.getReferencia()) && !"-1".equalsIgnoreCase(obj.getReferencia())) {
                 sql += " AND dska_refe = " + obj.getReferencia().trim() + " \n";
             }
-            System.out.println("Este es el sql:\n  " + sql );
+            System.out.println("Este es el sql:\n  " + sql);
             rs = function.enviarSelect(sql);
             while (rs.next()) {
                 if (cont == 0) {
@@ -530,6 +535,72 @@ public class Inv_ProductoLogica {
                 prod.setPorcIva(rs.getString("porcIva"));
                 String aux = buscaCanProdExistenXId(prod.getId());
                 prod.setCantidad(aux);
+                r.add(prod);
+            }
+        } catch (Exception e) {
+            System.out.println("Error Inv_ProductoLogica.buscaProductosXFiltro " + e);
+        } finally {
+            function.cerrarConexion();
+            function = null;
+        }
+        return r;
+    }
+
+    /**
+     * Funcion la cual busca los productos que tengan coincidencias no solo con
+     * los codigos exactos
+     *
+     * @param obj
+     * @param sede
+     * @return
+     */
+    public ArrayList<Producto> buscaProductosXFiltroLike(Producto obj, String sede) {
+        if (sede == null) {
+            sede = "1";
+        }
+        ArrayList<Producto> r = null;
+        EnvioFunction function = new EnvioFunction();
+        ResultSet rs = null;
+        int cont = 0;
+        try {
+            String sql = "select dska_refe referencia , dska_cod codigo , dska_nom_prod nombre, dska_desc descripcion, dska_marca marca, dska_dska id,"
+                    + "dska_iva iva, dska_porc_iva porcIva\n";
+            sql += ", to_char(prpr_precio,'LFM9,999,999.99') prpr_precio, marca_nombre, refe_desc \n ";
+            sql += "from in_tdska, in_tprpr, in_tmarca, in_trefe\n";
+            sql += " WHERE 1 = 1 ";
+            sql += " and prpr_dska = dska_dska ";
+            sql += " and marca_marca = dska_marca ";
+            sql += " and dska_refe = refe_refe ";
+            sql += " and prpr_sede = " + sede + " ";
+            if (obj.getCodigo() != null & !"".equalsIgnoreCase(obj.getCodigo())) {
+                sql += " and dska_cod like '%" + obj.getCodigo().trim() + "%'\n";
+            }
+            if (obj.getNombre() != null & !"".equalsIgnoreCase(obj.getNombre())) {
+                sql += " AND dska_nom_prod = '" + obj.getNombre().trim() + "'\n";
+            }
+
+            if (obj.getReferencia() != null && !"".equalsIgnoreCase(obj.getReferencia()) && !"-1".equalsIgnoreCase(obj.getReferencia())) {
+                sql += " AND dska_refe = " + obj.getReferencia().trim() + " \n";
+            }
+            //System.out.println("Este es el sql:\n  " + sql );
+            rs = function.enviarSelect(sql);
+            while (rs.next()) {
+                if (cont == 0) {
+                    r = new ArrayList<Producto>();
+                    cont++;
+                }
+                Producto prod = new Producto();
+                prod.setReferencia(rs.getString("refe_desc"));
+                prod.setCodigo(rs.getString("codigo"));
+                prod.setNombre(rs.getString("nombre"));
+                prod.setMarca(rs.getString("marca_nombre"));
+                prod.setId(rs.getString("id"));
+                prod.setDescripcion(rs.getString("descripcion"));
+                prod.setIva(rs.getString("iva"));
+                prod.setPorcIva(rs.getString("porcIva"));
+                String aux = buscaCanProdExistenXId(prod.getId());
+                prod.setCantidad(aux);
+                prod.setCosto(rs.getString("prpr_precio"));
                 r.add(prod);
             }
         } catch (Exception e) {

@@ -19,7 +19,7 @@
         obj.setReferencia(referencia);
         obj.setNombre(nombre);
         Usuario usuario = (Usuario) session.getAttribute("usuario");
-        ArrayList<Producto> rta = logica.buscaProductosXFiltro(obj, usuario.getSede());
+        ArrayList<Producto> rta = logica.buscaProductosXFiltroLike(obj, usuario.getSede());
         String objJson = gson.toJson(rta);
         out.print(objJson);       
     }catch(Exception e){

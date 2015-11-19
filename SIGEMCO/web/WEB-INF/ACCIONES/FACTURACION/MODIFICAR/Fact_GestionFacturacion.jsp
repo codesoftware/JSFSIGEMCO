@@ -139,6 +139,13 @@
             </div>
             <div class="col-md-1 col-xs-0 col-sm-0"></div>
         </div>
+        <div class="row">
+            <div class="col-md-1 col-xs-0 col-sm-0"></div>
+            <div class="col-md-10 col-xs-12 col-sm-12">
+                <a class="btn btn-primary" id="facturarCompleto" onclick="generarFactura()">FACTURAR</a>
+            </div>
+            <div class="col-md-1 col-xs-0 col-sm-0"></div>
+        </div>
         <!-- Inicio popups de la pagina-->
         <!-- Dialogo en el cual se elige si se va ha adicionar un servicio o un producto-->
         <div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" id="dialogoAddServProd">
@@ -311,5 +318,9 @@
             </div>
         </div>
         <!-- Fin popups de la pagina-->
+        <!-- Formulario con los json necesarios para la facturacion de los productos y de las resevas -->
+        <s:form theme="simple">
+            <s:textfield name="servicios" id="serviceJson"/>
+        </s:form>
     </body>
 </html>
