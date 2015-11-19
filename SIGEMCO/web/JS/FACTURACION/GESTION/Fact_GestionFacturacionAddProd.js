@@ -164,6 +164,7 @@ function dibujaTablaProductos(lstProductos){
                                 '<td><button type=\"button\" class=\"btn btn-danger elimnarFila\" >'+
                                 '<span class=\"glyphicon glyphicon-remove\" ></span> </button></td>'+
                                 '<td style=\"display:none;\" >'+
+                                    '<input type=\"text\" class=\"listaProductos\" value=\"'+data.objeto.dska_dska+'\" data-cantidad=\"'+data.objeto.cantidad+'\" />'+
                                     '<input type=\"text\" class=\"vlrIvatotal\" value=\"'+valorIva+'\" />'+
                                     '<input type=\"text\" class=\"vlrProdtotal\" value=\"'+valorTotal+'\" />'+
                                     '<input type=\"text\" class=\"vlrTotalPagar\" value=\"'+valorTotalVenta+'\" />'+

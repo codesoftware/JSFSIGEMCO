@@ -321,6 +321,7 @@
         <!-- Formulario con los json necesarios para la facturacion de los productos y de las resevas -->
         <s:form theme="simple">
             <s:textfield name="servicios" id="serviceJson"/>
+            <s:textfield name="productos" id="productJson"/>
         </s:form>
     </body>
 </html>

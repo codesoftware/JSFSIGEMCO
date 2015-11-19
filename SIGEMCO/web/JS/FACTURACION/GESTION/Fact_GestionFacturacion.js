@@ -65,16 +65,34 @@ function generarFactura() {
         var id = servicios[i].value;
         var fecha = servicios[i].dataset.dias;
         var dias = servicios[i].dataset.dias;
-        if(i != 0){
+        if (i != 0) {
             datos += ',{';
-        }else{
+        } else {
             datos += '{';
         }
-        datos += " \"id\" : \""+id+"\",";
-        datos += " \"fecha\" : \""+fecha+"\",";
-        datos += " \"dias\" : \""+dias+"\" ";
+        datos += " \"id\" : \"" + id + "\",";
+        datos += " \"fecha\" : \"" + fecha + "\",";
+        datos += " \"dias\" : \"" + dias + "\" ";
         datos += '}';
     }
     datos += "]";
     $('#serviceJson').val(datos);
+    
+    //Adicion de productos
+    var productos = document.getElementsByClassName('listaProductos');
+    var datosProd = '[';
+    for (var i = 0; i < productos.length; i++) {
+        var id = productos[i].value;
+        var cantidad = productos[i].dataset.cantidad;
+        if (i != 0) {
+            datosProd += ',{';
+        } else {
+            datosProd += '{';
+        }
+        datosProd += " \"id\" : \"" + id + "\",";
+        datosProd += " \"cantidad\" : \"" + cantidad + "\" ";
+        datosProd += '}';
+    }
+    datosProd += "]";
+    $('#productJson').val(datosProd);
 }
