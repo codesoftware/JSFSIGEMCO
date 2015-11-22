@@ -5,6 +5,10 @@
  */
 package co.com.hotel.validacion;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 /**
  * Clase la cual se encargara de validar formatos de los campos para ingresar un
  * nuevo usuario
@@ -136,6 +140,30 @@ public class ValidaCampos {
             }
         }
         return false;
+    }
+    /**
+     * Valida si la fecha ingresada es mayor a 18 años atras
+     * @return 
+     */
+    public boolean validaMayorDeEdad(String fecha){
+        try {
+            final long MILLSECS_PER_DAY = 24 * 60 * 60 * 1000; 
+            Date hoy = new Date();
+            Calendar usu = Calendar.getInstance();
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            usu.setTime(sdf.parse(fecha));
+            long fechaHoy = hoy.getTime();
+            long fechaUsu = usu.getTime().getTime();
+            long resultado = fechaHoy - fechaUsu;
+            long anios = (resultado/MILLSECS_PER_DAY)/365;
+            if(anios<18){
+                return false;
+            }else{
+                return true;
+            }
+        } catch (Exception e) {
+            return false;
+        }
     }
 
 }

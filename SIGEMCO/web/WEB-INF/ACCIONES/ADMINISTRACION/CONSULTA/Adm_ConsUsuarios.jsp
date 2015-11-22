@@ -63,9 +63,8 @@
                     <div class="row">
                         <div class="form-group col-md-4 col-sm-4 col-xs-4"></div>
                         <div class="form-group col-md-4 col-sm-4 col-xs-4"></div>
-                        <div class="form-group col-md-4 col-sm-4 col-xs-4">   
+                        <div class="form-group col-md-4 col-sm-4 col-xs-4 text-right">   
                             <s:include value="/WEB-INF/TEMPLATE/botones/findUser.jsp" />                       
-                            <s:include value="/WEB-INF/TEMPLATE/botones/report.jsp" />
                         </div>
                     </div>
                 </s:form>
