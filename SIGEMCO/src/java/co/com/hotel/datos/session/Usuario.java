@@ -31,8 +31,7 @@ public class Usuario {
     private String campo2;
     private String campo3;
     private String campo4;
-    
-            
+    private String acronimo;
 
     public String getCedula() {
         return cedula;
@@ -193,7 +192,13 @@ public class Usuario {
     public void setCampo4(String campo4) {
         this.campo4 = campo4;
     }
-    
-    
+
+    public String getAcronimo() {
+        return acronimo;
+    }
+
+    public void setAcronimo(String acronimo) {
+        this.acronimo = acronimo;
+    }
 
 }

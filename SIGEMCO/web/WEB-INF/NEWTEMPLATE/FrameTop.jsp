@@ -1,5 +1,7 @@
 <div class="row cabecera">
-    <div class="col-md-4 col-sm-1">
+    <div class="col-md-4 col-sm-1">        
+        <img src="/SIGEMCO/IMAGENES/logo.jpg" width="100" height="100" style="margin-top: 25px;margin-left: 25px;"/><br/>
+        <div style="font-size: 15px; margin-left: 25px;">${param.acronimo}</div>
     </div>
     <div class="col-md-4 col-sm-10">
     </div>

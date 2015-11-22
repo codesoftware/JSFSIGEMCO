@@ -70,7 +70,10 @@
                                 <%}
                                     if (permisos.indexOf(".AdEm2.") >= 0) {%>
                             <li><a href="reenvioGeneral.action?accion=132">Parametros Generales</a></li>
-                                <%}%>
+                                <%}
+                                    if (permisos.indexOf(".AdEm3.") >= 0) {%>
+                            <li><a href="reenvioGeneral.action?accion=133">Logo</a></li>
+                            <% }%>
                         </ul>
                     </li>
                     <%}%>

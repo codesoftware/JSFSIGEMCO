@@ -5,7 +5,6 @@
 <html>
     <head>
         <s:include value="/WEB-INF/NEWTEMPLATE/cabecera.jsp"></s:include>
-         <script type="text/javascript" src="JS/INVENTARIOS/Inv_UpdCategoria.js"></script>
         </head>
         <body>
         <s:div cssClass="header">
@@ -24,6 +23,7 @@
         <div class="row">
             <div class="col-md-3 col-xs-0 col-sm-0"></div>
             <div class="col-md-6 col-xs-12 col-sm-12">
+                <br/>
                 <div class="Mensajes" style="display: none;">
                     <s:if test="hasActionErrors()">
                         <div class="alert alert-danger" id="info" role="alert" ><h4><s:actionerror /></h4></div>
@@ -41,46 +41,34 @@
                     </s:if>
                 </div>
                 <br/>
-                <s:form action="inv_InsCategoria" method="post" theme="simple">
-                    <s:textfield name="accion" cssStyle="display:none;" value="insertar" />
-                    <table class="table table-bordered" >
+            </div>
+            <div class="col-md-3 col-xs-0 col-sm-0"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 col-xs-0 col-sm-0"></div>
+            <div class="col-md-6 col-xs-12 col-sm-12">
+                <s:form method="post" enctype="multipart/form-data" action="adm_subirLogo" theme="simple">
+                    <table class="table table-bordered">
                         <thead>
                             <tr>
-                                <th colspan="2" style="text-align: center;" class="alert alert-info text-center"><h3>INSERCION DE CATEGORIAS</h3></th>
-                        </tr>
+                                <td class="alert alert-info" colspan="2">PARAMETRIZACION DEL LOGO</td>
+                            </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td><h4>Descripción:</h4></td>
-                                <td><s:textfield name="categoria.cate_desc" cssClass="form-control"  /></td>
-                            </tr>                        
-                            <tr style="display: none;">
-                                <td><h4>Fecha vencimiento:</h4></td>
-                                <td><s:textfield  name="categoria.cate_feven" required="true" maxLength="10" cssClass="form-control" /></td>
-                            </tr>
-
-                            <tr>
-                                <td><h4>Estado:</h4></td>
-                                <td><s:select  list="estadoMap"  name="categoria.cate_estado" required="true" headerKey="-1" headerValue="Estado" cssClass="form-control"/></td>
-                            </tr>
-                            <tr style="display: none;">
-                                <td><h4>registro Unico:</h4></td>
-                                <td><s:select  list="runico"  name="categoria.cate_runic" required="true" headerKey="-1" headerValue="Registo unico" cssClass="form-control"/></td>
-                            </tr>
-
-                        </tbody>                        
-                        <tfoot>
-                            <tr>
-                                <td style="text-align: right;" colspan="2">
-                                    <s:include value="/WEB-INF/TEMPLATE/botones/add.jsp" > 
-                                        <s:param name="function">insertarCategoria</s:param>
-                                        <s:param name="title">Adicion Categoria</s:param>
-                                    </s:include>
-                                    <s:include value="/WEB-INF/TEMPLATE/botones/clean.jsp" />
-
+                                <td>Adjunte la imagen del Logo</td>
+                                <td>
+                                    <s:file name="imagen" cssClass="form-control"/>
                                 </td>
                             </tr>
-                        </tfoot>
+                            <tr>
+                                <td>Acronimo:</td>
+                                <td><s:textfield cssClass="form-control" name="acronimo"/></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><s:submit cssClass="btn btn-primary" value="CARGAR IMAGEN"/></td>
+                            </tr>
+                        </tbody>
                     </table>
                 </s:form>
             </div>

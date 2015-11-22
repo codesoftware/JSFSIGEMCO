@@ -19,6 +19,7 @@
                 <s:param name="nombre"><s:text name="usuario.apellido"/><s:text name="usuario.nombre"/></s:param>
                 <s:param name="perfil"><s:text name="usuario.NomPerfil"/></s:param>
                 <s:param name="ultimoIngreso"><s:text name="usuario.UltimoIngreso"/></s:param>
+                <s:param name="acronimo"><s:text name="usuario.acronimo"/></s:param>
             </s:include>
         </s:div> 
         <s:div cssClass="navigator">

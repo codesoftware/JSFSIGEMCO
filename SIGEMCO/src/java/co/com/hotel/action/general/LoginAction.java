@@ -11,10 +11,15 @@ import co.com.hotel.datos.session.Usuario;
 import co.com.hotel.logica.general.ConfirmaDatos;
 import co.com.hotel.logica.general.RecuperaUsuario;
 import co.com.hotel.logica.parametros.Aut_ParametrosLogica;
+import co.com.sigemco.alfa.admin.logica.AdministracionLogica;
+import co.com.sigemco.alfa.admin.logica.LogoLogica;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.SessionAware;
 
 /**
@@ -35,7 +40,6 @@ public class LoginAction extends ActionSupport implements SessionAware {
     public static final String CAJERO = "cajero";
 
     //private Map<String,Object> session;
-
     /**
      * Funcion por default de Struts la cual se encargara de determinar si el
      * usuario el cual intenta ingresar tiene acceso al sistema o no
@@ -52,6 +56,9 @@ public class LoginAction extends ActionSupport implements SessionAware {
             this.usuario = recuperaUsuario.recuperaDatosUsuario(this.user);
             this.usuario.setCambioContra(acceso.getUpdate());
             this.usuario.setUsuario(this.user);
+            //Obtengo el acronimo de la aplicacion
+            AdministracionLogica objLogAdm = new AdministracionLogica();
+            this.usuario.setAcronimo(objLogAdm.obtieneAcronimoAplicacion());
             //Registro el ultimo ingreso del usuario
             confirma.registraUltimoIngreso(this.usuario.getIdTius());
             //Obtenemos los parametros generales de la aplicación
@@ -61,6 +68,11 @@ public class LoginAction extends ActionSupport implements SessionAware {
             session.put("usuario", this.usuario);
             session.put("parametros", this.parametros);
             String tpUsua = usuario.getTipoUsuario();
+            //Copia la imagen del logo al proyecto 
+            HttpServletRequest request = ServletActionContext.getRequest();
+            File logoServ = new File(request.getSession().getServletContext().getRealPath("/IMAGENES/logo.jpg"));
+            LogoLogica logLogo = new LogoLogica();
+            logLogo.guardaImagenServidor(logoServ);
             if (tpUsua.equalsIgnoreCase("AD")) {
                 return ADMINISTRADOR;
             } else {

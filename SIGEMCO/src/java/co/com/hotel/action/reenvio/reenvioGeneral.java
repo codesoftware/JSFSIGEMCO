@@ -54,6 +54,7 @@ public class reenvioGeneral extends ActionSupport implements UsuarioHabilitado, 
     public static final int ADM_CON_PERFIL = 124;
     public static final int ADM_INS_EMPRESA = 131;   //Informacion general de la empresa
     public static final int ADM_INS_PAREMPRE = 132;   //Informacion general de la empresa
+    public static final int ADM_INS_LOGO = 133;   //Informacion general de la empresa
 
     public static final int ADM_INS_SEDE = 141;   //
     public static final int ADM_UPD_SEDE = 142;   //
@@ -254,6 +255,9 @@ public class reenvioGeneral extends ActionSupport implements UsuarioHabilitado, 
                     logicaEmp = new Emp_EmpresaLogica();
                     empresa = logicaEmp.obtieneDatosEmpresa();
                     nextPage = "adm_ins_parempre";
+                    break;
+                case ADM_INS_LOGO:
+                    nextPage = "adm_ins_logo";
                     break;
                 case INV_INS_PRODUCTO:
                     nextPage = "inv_ins_producto";

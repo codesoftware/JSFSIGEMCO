@@ -47,11 +47,11 @@ public class AdministracionLogica {
      */
     public List<ProductoDto> buscaProdProximosTerminar() {
         List<ProductoDto> lista = null;
-        try (EnvioFunction function = new EnvioFunction()){
+        try (EnvioFunction function = new EnvioFunction()) {
             ParametrosAplicacionDao objDao = new ParametrosAplicacionDao();
             ResultSet rs = function.enviarSelect(objDao.buscaProductosAlerta());
-            while(rs.next()){
-                if(lista == null){
+            while (rs.next()) {
+                if (lista == null) {
                     lista = new ArrayList<>();
                 }
                 ProductoDto aux = new ProductoDto();
@@ -64,6 +64,69 @@ public class AdministracionLogica {
             e.printStackTrace();
         }
         return lista;
+    }
+
+    /**
+     * Funcion con la cual guardo el acronimo de la compañia en la base se datos
+     *
+     * @param acronimo
+     * @return
+     */
+    public String guardaAcronimo(String acronimo) {
+        String rta = "Ok";
+        try (EnvioFunction function = new EnvioFunction()) {
+            ParametrosAplicacionDao objDao = new ParametrosAplicacionDao();
+            if (this.consultaExistenciaAcronimo() == 0) {
+                function.enviarUpdate(objDao.insertaAcronimo(acronimo));
+            } else {
+                function.enviarUpdate(objDao.actualizaAcronimo(acronimo));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            rta = "Ok";
+        }
+        return rta;
+    }
+
+    /**
+     * Funcion con la cual consulto si existe el acronimo de facturacion en la
+     * base de datos 0 si no existe y 1 si existe
+     *
+     * @return
+     */
+    public int consultaExistenciaAcronimo() {
+        int rta = 0;
+        try (EnvioFunction funcion = new EnvioFunction()) {
+            ParametrosAplicacionDao objDao = new ParametrosAplicacionDao();
+            ResultSet rs = funcion.enviarSelect(objDao.consultaExistenciaAcronimo());
+            if (rs.next()) {
+                rta = rs.getInt("contador");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+        return rta;
+    }
+
+    /**
+     * Funcion con la cual obtengo el acronimo parametrizado de la aplicacion
+     *
+     * @return
+     */
+    public String obtieneAcronimoAplicacion() {
+        String rta = "";
+        try (EnvioFunction funcion = new EnvioFunction()) {
+            ParametrosAplicacionDao objDao = new ParametrosAplicacionDao();
+            ResultSet rs = funcion.enviarSelect(objDao.consultaAcronimo());
+            if (rs.next()) {
+                rta = rs.getString("acronimo");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        return rta;
     }
 
 }
