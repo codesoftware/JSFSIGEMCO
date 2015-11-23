@@ -8,7 +8,7 @@ $(function () {
 function consultaCierre() {
     var valida = validaDatos();
     if (valida) {
-        
+        document.getElementById('inv_consCierre').submit();
     }
 }
 function consultaCierreDetalle() {

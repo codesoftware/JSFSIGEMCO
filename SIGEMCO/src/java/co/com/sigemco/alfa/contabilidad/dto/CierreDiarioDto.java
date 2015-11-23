@@ -20,6 +20,8 @@ public class CierreDiarioDto {
     private String cier_vlrc;
     private int cier_sede;
     private int cier_estado;
+    private String estado;
+    private String nombreSede;
 
     public int getCier_cier() {
         return cier_cier;
@@ -84,16 +86,21 @@ public class CierreDiarioDto {
     public void setCier_estado(int cier_estado) {
         this.cier_estado = cier_estado;
     }
-    /**
-     * Funcion que hace la insercion de el cierre diario
-     * @return 
-     */
-    public String insertCierre(){
-        String sql="";
-        return sql;
+
+    public String getEstado() {
+        return estado;
     }
-    /**
-     * 
-     */
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public String getNombreSede() {
+        return nombreSede;
+    }
+
+    public void setNombreSede(String nombreSede) {
+        this.nombreSede = nombreSede;
+    }
 
 }

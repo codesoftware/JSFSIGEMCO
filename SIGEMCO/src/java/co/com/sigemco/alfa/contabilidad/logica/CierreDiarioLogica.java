@@ -8,14 +8,17 @@ package co.com.sigemco.alfa.contabilidad.logica;
 import co.com.hotel.logica.reportes.Rep_ReporteLogica;
 import co.com.hotel.persistencia.general.EnvioFunction;
 import co.com.sigemco.alfa.contabilidad.dao.CierreDiarioDao;
+import co.com.sigemco.alfa.contabilidad.dto.CierreDiarioDto;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -234,6 +237,34 @@ public class CierreDiarioLogica {
             e.printStackTrace();
         }
         return cod_cierre;
+    }
+    /**
+     * Funcion con la cual se realiza 
+     * @param fecha
+     * @return 
+     */
+    public ArrayList<CierreDiarioDto> buscaCierresXFecha(String fecha, String sede){
+        ArrayList<CierreDiarioDto> rta = null;
+        try(EnvioFunction function = new EnvioFunction()) {
+            CierreDiarioDao objDao = new CierreDiarioDao();
+            ResultSet rs = function.enviarSelect(objDao.consultaCierres(fecha, sede));
+            while(rs.next()){
+                if(rta == null){
+                    rta = new ArrayList<CierreDiarioDto>();
+                }
+                CierreDiarioDto aux = new CierreDiarioDto();
+                aux.setCier_cier(rs.getInt("cier_cier"));
+                aux.setEstado(rs.getString("cier_estado"));
+                aux.setCier_fech(rs.getString("cier_fech"));
+                aux.setCier_sede(rs.getInt("cier_sede"));
+                aux.setCier_vlrt(rs.getString("cier_vlrt"));
+                aux.setNombreSede(rs.getString("sede_nombre"));
+                rta.add(aux);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return rta;
     }
 
 }
