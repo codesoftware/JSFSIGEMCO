@@ -15,6 +15,7 @@ import co.com.hotel.logica.perfil.Adm_PerfilLogica;
 import co.com.hotel.logica.sede.Adm_SedeLogica;
 import co.com.hotel.logica.usuarios.Adm_UsuarioLogica;
 import co.com.hotel.utilidades.UsuarioHabilitado;
+import co.com.sigemco.alfa.admin.logica.DepartamentoLogica;
 import co.com.sigemco.alfa.contabilidad.dto.ClaseDto;
 import co.com.sigemco.alfa.contabilidad.logica.ClaseLogica;
 import co.com.sigemco.alfa.inventario.dto.PantallaPrincipalDto;
@@ -183,6 +184,7 @@ public class reenvioGeneral extends ActionSupport implements UsuarioHabilitado, 
     //Mapa para consultar los parametros detallados de la empresa
     private Map<String, String> parametrosEspeciales;
     private String parametrosComparar;
+    private Map<String, String> departamentos;
 
     /**
      *
@@ -250,6 +252,8 @@ public class reenvioGeneral extends ActionSupport implements UsuarioHabilitado, 
                     nextPage = "adm_ins_empresa";
                     logicaEmp = new Emp_EmpresaLogica();
                     empresa = logicaEmp.obtieneDatosEmpresa();
+                    DepartamentoLogica logicaDep = new DepartamentoLogica();
+                    this.departamentos = logicaDep.obtieneListaDepartamentos(1);
                     break;
                 case ADM_INS_PAREMPRE:
                     logicaEmp = new Emp_EmpresaLogica();
@@ -946,6 +950,14 @@ public class reenvioGeneral extends ActionSupport implements UsuarioHabilitado, 
 
     public void setParametrosComparar(String parametrosComparar) {
         this.parametrosComparar = parametrosComparar;
+    }
+
+    public Map<String, String> getDepartamentos() {
+        return departamentos;
+    }
+
+    public void setDepartamentos(Map<String, String> departamentos) {
+        this.departamentos = departamentos;
     }
 
 }

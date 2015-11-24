@@ -81,8 +81,18 @@
                                 <td><s:textfield cssClass="form-control" name="empresa.telefono" /></td>
                             </tr>
                             <tr>
+                                <td>Departamento:</td>
+                                <td>
+                                    <s:select list="departamentos" cssClass="form-control" headerValue="SELECCIONE UN DEPARTAMENTO" headerKey="-1" onchange="cambioDepartamento(this.value)" name="empresa.departamento" ></s:select>
+                                </td>
+                            </tr>
+                            <tr>
                                 <td>Ciudad:</td>
-                                <td><s:textfield cssClass="form-control" name="empresa.ciudad" /></td>
+                                <td>
+                                    <select id="selectCiudad" name="empresa.ciudad" class="form-control" >
+                                        <option value="-1">SELECCIONE UNA DEPARTAMENTO</option>
+                                    </select>
+                                </td>
                             </tr>
                         </tbody>
                         <tfoot>
@@ -100,6 +110,13 @@
                 </s:form>
             </div>     
             <div class="col-md-3 col-xs-0 col-sm-0"></div>
+            <s:if test="%{empresa.ciudad != null}">
+                <script>
+                    cambioDepartamento(document.getElementById('adm_updtParaEmp_empresa_departamento').value);
+                    var ciudad = '<s:text name="empresa.ciudad"/>';
+                    document.getElementById('selectCiudad').value = ciudad;
+                </script>
+            </s:if>
         </div> 
     </body>
 </html>

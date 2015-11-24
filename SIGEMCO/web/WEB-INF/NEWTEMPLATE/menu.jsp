@@ -73,25 +73,7 @@
                                 <%}
                                     if (permisos.indexOf(".AdEm3.") >= 0) {%>
                             <li><a href="reenvioGeneral.action?accion=133">Logo</a></li>
-                            <% }%>
-                        </ul>
-                    </li>
-                    <%}%>
-                    <%  if (permisos.indexOf(".cieDi1.") >= 0 || permisos.indexOf(".cieDi2.") >= 0) {%>
-                    <li><a href="#">Cierres</a>
-                        <ul class="dropdown-menu">
-                            <%if (permisos.indexOf(".cieDi1.") >= 0) {%>
-                            <li><a href="reenvioGeneral.action?accion=151">Cierre Diario</a></li>
-                                <%}%>
-                        </ul>
-                    </li>
-                    <%}%>
-                    <%  if (permisos.indexOf(".reGen1.") >= 0 || permisos.indexOf(".reGen2.") >= 0) {%>
-                    <li><a href="#">Reportes</a>
-                        <ul class="dropdown-menu">
-                            <%if (permisos.indexOf(".reGen1.") >= 0) {%>
-                            <li><a href="reenvioGeneral.action?accion=152">REPORTES GENERALES</a></li>
-                                <%}%>
+                                <% }%>
                         </ul>
                     </li>
                     <%}%>
@@ -314,10 +296,29 @@
                         <ul class="dropdown-menu">
                             <% if (permisos.indexOf(".RpIn1.") > 0) { %>
                             <li><a href="reenvioGeneral.action?accion=411">Promedio Ponderado</a></li>
-                            <%}%>
-                            <% if (permisos.indexOf(".RpIn2.") > 0 || permisos.indexOf(".RpIn3.") > 0) { %>
+                                <%}%>
+                                <% if (permisos.indexOf(".RpIn2.") > 0 || permisos.indexOf(".RpIn3.") > 0) { %>
                             <li><a href="reenvioGeneral.action?accion=412">Reportes Basicos</a></li>
-                            <%}%>
+                                <%}%>
+
+                        </ul>
+                    </li>
+                    <%}%>
+                    <%  if (permisos.indexOf(".reGen1.") >= 0 || permisos.indexOf(".reGen2.") >= 0) {%>
+                    <li><a href="#">Reportes</a>
+                        <ul class="dropdown-menu">
+                            <%if (permisos.indexOf(".reGen1.") >= 0) {%>
+                            <li><a href="reenvioGeneral.action?accion=152">REPORTES GENERALES</a></li>
+                                <%}%>
+                        </ul>
+                    </li>
+                    <%}%>
+                    <%  if (permisos.indexOf(".cieDi1.") >= 0 || permisos.indexOf(".cieDi2.") >= 0) {%>
+                    <li><a href="#">Cierres</a>
+                        <ul class="dropdown-menu">
+                            <%if (permisos.indexOf(".cieDi1.") >= 0) {%>
+                            <li><a href="reenvioGeneral.action?accion=151">Cierre Diario</a></li>
+                                <%}%>
                         </ul>
                     </li>
                     <%}%>
@@ -366,18 +367,18 @@
         function irInicio() {
             location.href = RutaSitio + '/inicioAdmin.action';
         }
-        function nuevoSigemco(){
+        function nuevoSigemco() {
             var igualPuerto = '<s:text name="nuevoSigemco.url"/>';
             var puerto = '';
-            var ubicacion =  location;
+            var ubicacion = location;
             var host = location.hostname;
             var aplication = '/NSIGEMCO/index.jsf';
-            if(igualPuerto == 'NO'){
+            if (igualPuerto == 'NO') {
                 puerto = '<s:text name="nuevoSigemco.puerto"/>';
-            }else{
+            } else {
                 puerto = location.port;
             }
-            var ruta = "http://"+ host + ":" + puerto + aplication;
+            var ruta = "http://" + host + ":" + puerto + aplication;
             document.getElementById('redirectNewSigemco').action = ruta;
             document.getElementById('redirectNewSigemco').submit();
         }
