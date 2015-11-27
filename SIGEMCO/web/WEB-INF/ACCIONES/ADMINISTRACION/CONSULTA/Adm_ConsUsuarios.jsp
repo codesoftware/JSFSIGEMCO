@@ -84,6 +84,7 @@
                                 <th>USUARIO</th>
                                 <th>PERFIL</th>
                                 <th>SEDE</th>
+                                <th>ESTADO</th>
                             </tr>                    
                         </thead>
                         <tbody>
@@ -109,6 +110,15 @@
                                     <td><s:property value="usuario"/></td>
                                     <td><s:property value="NomPerfil"/></td>
                                     <td><s:property value="sede"/></td>
+                                    <td>
+                                        <s:if test="%{estado.equalsIgnoreCase('A')}">
+                                            Activo
+                                        </s:if>
+                                        <s:else>
+                                            Inactivo
+                                        </s:else>
+                                        <!--<s:property value="estado"/>-->
+                                    </td>
                                 </tr>
                             </s:iterator>
                         </tbody>

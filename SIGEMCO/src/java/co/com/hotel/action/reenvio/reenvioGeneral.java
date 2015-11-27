@@ -66,6 +66,7 @@ public class reenvioGeneral extends ActionSupport implements UsuarioHabilitado, 
     public static final int ADM_REPORTE_GRAL = 152;
     //MODULO INVENTARIOS (Primer digito 2)
     public static final int INV_INS_PRODUCTO = 211;
+    public static final int INV_GES_PRODUCTO = 217;
     public static final int INV_INS_PRODEXIS = 219; //El ultimo digito es nueve ya que  ya existe la insercion de productos
     public static final int INV_UPD_PRODUCTO = 212;
     public static final int INV_CON_PRODUCTO = 214;
@@ -254,6 +255,9 @@ public class reenvioGeneral extends ActionSupport implements UsuarioHabilitado, 
                     empresa = logicaEmp.obtieneDatosEmpresa();
                     DepartamentoLogica logicaDep = new DepartamentoLogica();
                     this.departamentos = logicaDep.obtieneListaDepartamentos(1);
+                    break;
+                case INV_GES_PRODUCTO:
+                    nextPage = "inv_ges_producto";
                     break;
                 case ADM_INS_PAREMPRE:
                     logicaEmp = new Emp_EmpresaLogica();

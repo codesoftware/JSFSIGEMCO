@@ -127,7 +127,7 @@
                             <tbody>
                                 <tr>
                                     <td>
-                                        No. Productos:
+                                        Cantidad:
                                     </td>
                                     <td>
                                         <s:textfield cssClass="form-control" id="numProd" name="addicionProd.noProductos" onkeypress="return validaNumeros(event)"/>
