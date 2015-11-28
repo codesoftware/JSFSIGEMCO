@@ -62,6 +62,14 @@
                                 <td>Teléfono:</td>
                                 <td><s:textfield cssClass="form-control" name="sede.sede_telefono" /></td>
                             </tr>
+                            <tr>
+                                <td>
+                                    Marcar como Bodega:
+                                </td>
+                                <td>
+                                    <s:select list="yesNo" cssClass="form-control" headerValue="Aplica Bodega" headerKey="-1" name="sede.sede_bodega" />
+                                </td>
+                            </tr>
                         </tbody>
                         <tr>
                             <td colspan="4">

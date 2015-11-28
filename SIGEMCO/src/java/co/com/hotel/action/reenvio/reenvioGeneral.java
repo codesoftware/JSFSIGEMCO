@@ -604,6 +604,9 @@ public class reenvioGeneral extends ActionSupport implements UsuarioHabilitado, 
                     break;
                 case ADM_INS_SEDE:
                     nextPage = "adm_ins_sede";
+                    this.yesNo = new HashMap<String, String>();
+                    this.yesNo.put("S", "Si");
+                    this.yesNo.put("N", "No");
                     break;
                 case CON_CONSGENCLASES:
                     logicaClase = new ClaseLogica();

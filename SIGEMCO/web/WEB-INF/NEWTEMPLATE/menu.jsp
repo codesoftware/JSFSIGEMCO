@@ -350,7 +350,7 @@
 
         <!-- Right nav -->
         <ul class="nav navbar-nav navbar-right">
-            <li style="display: none;"><a href="#" aria-label="Left Align" onclick="nuevoSigemco();">
+            <li><a href="#" aria-label="Left Align" onclick="nuevoSigemco();">
                     <span class="glyphicon glyphicon-new-window" ></span>&nbsp;NSIGEMCO
                 </a>             
             </li>

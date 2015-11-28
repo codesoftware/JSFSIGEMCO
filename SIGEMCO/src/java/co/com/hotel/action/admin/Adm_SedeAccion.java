@@ -9,6 +9,7 @@ import co.com.hotel.datos.session.Usuario;
 import co.com.hotel.dto.Sede;
 import co.com.hotel.logica.sede.Adm_SedeLogica;
 import co.com.hotel.utilidades.UsuarioHabilitado;
+import co.com.hotel.validacion.ValidaCampos;
 import com.opensymphony.xwork2.ActionSupport;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,6 +29,7 @@ public class Adm_SedeAccion extends ActionSupport implements SessionAware, Usuar
     private Sede sede;
     private ArrayList<Sede> resultSede = null;
     private Map<String, String> estadoMap;
+    private Map<String, String> yesNo;
 
     /**
      * Funcion con la cual se realiza la accion de insertar una sede en la base
@@ -53,8 +55,20 @@ public class Adm_SedeAccion extends ActionSupport implements SessionAware, Usuar
     }
 
     public void validate() {
+        this.yesNo = new HashMap<String, String>();
+        this.yesNo.put("S", "Si");
+        this.yesNo.put("N", "No");
         if (accion.equalsIgnoreCase("insertar")) {
-
+            ValidaCampos valida = new ValidaCampos();
+            if(!valida.validaNulo(sede.getSede_nombre())){
+                addActionError("El campo sede nombre no puede ser nulo");
+            }else if(!valida.validaNulo(sede.getSede_direccion())){
+                addActionError("El campo sede direccion no puede ser nulo");
+            }else if (!valida.validaNulo(sede.getSede_telefono())){
+                addActionError("El campo sede nombre no puede ser nulo");
+            }else if("-1".equalsIgnoreCase(sede.getSede_bodega())){
+                addActionError("Por favor seleccione si esta sede aplicara como bodega");
+            }
         }
     }
 
@@ -66,7 +80,7 @@ public class Adm_SedeAccion extends ActionSupport implements SessionAware, Usuar
      */
     @SkipValidation
     public String consultar() {
-        System.out.println("Entra Sede" + sede.getSede_estado());
+        //System.out.println("Entra Sede" + sede.getSede_estado());
         try {
 
             if (sede.getSede_estado().equals("A") || sede.getSede_estado().equals("I") || sede.getSede_estado().equals("-1")) {
@@ -96,6 +110,9 @@ public class Adm_SedeAccion extends ActionSupport implements SessionAware, Usuar
         this.estadoMap = new HashMap<String, String>();
         this.estadoMap.put("A", "Activo");
         this.estadoMap.put("I", "Inactivo");
+        this.yesNo = new HashMap<String, String>();
+        this.yesNo.put("S", "Si");
+        this.yesNo.put("N", "No");
         Adm_SedeLogica logica = null;
         try {
             logica = new Adm_SedeLogica();
@@ -120,6 +137,9 @@ public class Adm_SedeAccion extends ActionSupport implements SessionAware, Usuar
      */
     @SkipValidation
     public String consultaSedeEspecifico() {
+        this.yesNo = new HashMap<String, String>();
+        this.yesNo.put("S", "Si");
+        this.yesNo.put("N", "No");
         this.estadoMap = new HashMap<String, String>();
         this.estadoMap.put("A", "Activo");
         this.estadoMap.put("I", "Inactivo");
@@ -181,6 +201,14 @@ public class Adm_SedeAccion extends ActionSupport implements SessionAware, Usuar
 
     public void setEstadoMap(Map<String, String> estadoMap) {
         this.estadoMap = estadoMap;
+    }
+
+    public Map<String, String> getYesNo() {
+        return yesNo;
+    }
+
+    public void setYesNo(Map<String, String> yesNo) {
+        this.yesNo = yesNo;
     }
 
 }
