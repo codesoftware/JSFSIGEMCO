@@ -41,4 +41,55 @@ public class ParametrosAplicacionDao {
         return sql.toString();
     }
 
+    /**
+     * Funcion con la cual inserto el acronimo en la base de datos
+     *
+     * @return
+     */
+    public String insertaAcronimo(String acronimo) {
+        StringBuilder sql = new StringBuilder();
+        sql.append("insert into em_tpara(para_clave, para_valor) ");
+        sql.append("values ('ACRONIMO','" + acronimo + "') ");
+        return sql.toString();
+    }
+    /**
+     * Funcion con la cual actualizo el acronimo parametrizado en la base de datos
+     * @return 
+     */
+    public String actualizaAcronimo(String acronimo){
+        StringBuilder sql = new StringBuilder();
+        sql.append("update em_tpara ");
+        sql.append("set para_valor = '");
+        sql.append(acronimo);
+        sql.append("' ");
+        sql.append("WHERE para_clave = 'ACRONIMO' ");
+        return sql.toString();
+    }
+
+    /**
+     * Funcion con la cual creo el sql para verificar si el acronimo se
+     * encuentra almacenado en la base de datos
+     *
+     * @return
+     */
+    public String consultaExistenciaAcronimo() {
+        StringBuilder sql = new StringBuilder();
+        sql.append("select count(*) contador ");
+        sql.append("from em_tpara ");
+        sql.append("where para_clave = 'ACRONIMO' ");
+        return sql.toString(); 
+    }
+    
+    /**
+     * Funcion con la cual creo el sql para obtener el acronimo parametrizado     
+     * @return
+     */
+    public String consultaAcronimo() {
+        StringBuilder sql = new StringBuilder();
+        sql.append("select para_valor acronimo ");
+        sql.append("from em_tpara ");
+        sql.append("where para_clave = 'ACRONIMO' ");
+        return sql.toString(); 
+    }
+
 }

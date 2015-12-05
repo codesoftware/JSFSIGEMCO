@@ -47,6 +47,7 @@ public class CierreDiarioAction extends ActionSupport implements UsuarioHabilita
     private InputStream fileInputStream;
     private long contentLength;
     private String contentName;
+    private ArrayList listaCierres;
 
     @SkipValidation
     public String execute() {
@@ -104,12 +105,35 @@ public class CierreDiarioAction extends ActionSupport implements UsuarioHabilita
         return SUCCESS;
     }
 
+    /**
+     * Funcion con la cual se consultan los reportes de cierres diarios
+     *
+     * @return
+     */
+    public String consultaCierres() {
+        CierreDiarioLogica objLogica = new CierreDiarioLogica();
+        try {
+            listaCierres = objLogica.buscaCierresXFecha(fecha,sede);
+            if(listaCierres == null){
+                addActionError("La consulta no arrojo ningun resultado");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return SUCCESS;
+    }
+
     public void validate() {
         if ("cierreDiario".equalsIgnoreCase(accion)) {
             Adm_SedeLogica sedeLogica = null;
             sedeLogica = new Adm_SedeLogica();
             this.sedes = sedeLogica.obtieneSedes();
 
+        }
+        if ("consulta".equalsIgnoreCase(accion)) {
+            Adm_SedeLogica sede = new Adm_SedeLogica();
+            this.sedes = sede.obtieneSedes();
         }
     }
 
@@ -296,6 +320,14 @@ public class CierreDiarioAction extends ActionSupport implements UsuarioHabilita
 
     public void setContentName(String contentName) {
         this.contentName = contentName;
+    }
+
+    public ArrayList getListaCierres() {
+        return listaCierres;
+    }
+
+    public void setListaCierres(ArrayList listaCierres) {
+        this.listaCierres = listaCierres;
     }
 
 }

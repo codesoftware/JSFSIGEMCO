@@ -46,7 +46,7 @@ public class Adm_UsuarioLogica {
     public ArrayList<Usuario> consultaGeneral(String estado, String perfil,String sedes) {
         ArrayList<Usuario> result = null;
         String sql = "";
-        sql = "select (apellido || ' ' ||nombre) nomCompleto, cedula, usuario, correo, perfil_usuario perfil, nombreSede \n";
+        sql = "select (apellido || ' ' ||nombre) nomCompleto, cedula, usuario, correo, perfil_usuario perfil, nombreSede,estado_usuario \n";
         sql += "from us_vusuarios\n";
         sql += "where 1=1\n";
         if (!estado.equalsIgnoreCase("-1")) {
@@ -73,12 +73,14 @@ public class Adm_UsuarioLogica {
                 String correo = rs.getString("correo");
                 String perfilA = rs.getString("perfil");
                 String nombreSede = rs.getString("nombreSede");
+                String estado_usuario = rs.getString("estado_usuario");
                 usuAux.setNombre(nombre);
                 usuAux.setCedula(cedula);
                 usuAux.setUsuario(usuario);
                 usuAux.setCorreo(correo);
                 usuAux.setNomPerfil(perfilA);
                 usuAux.setSede(nombreSede);
+                usuAux.setEstado(estado_usuario);
                 result.add(usuAux);
             }
         } catch (Exception e) {

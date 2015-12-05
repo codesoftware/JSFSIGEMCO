@@ -22,6 +22,7 @@
                 <s:param name="nombre"><s:text name="usuario.apellido"/> <s:text name="usuario.nombre"/></s:param>
                 <s:param name="perfil"><s:text name="usuario.NomPerfil"/></s:param>
                 <s:param name="ultimoIngreso"><s:text name="usuario.ultimoIngreso"/></s:param>
+                <s:param name="acronimo"><s:text name="usuario.acronimo"/></s:param>
             </s:include>
         </s:div>
         <s:div cssClass="navigator">
@@ -78,6 +79,7 @@
                             <td>DIRECCIÓN</td>
                             <td>TELÉFONO</td>
                             <td>FECHA CREACIÓN</td>
+                            <td>APLICA BODEGA</td>
                             <td>ACCIÓN</td>
                         </tr>
                         <%
@@ -100,13 +102,21 @@
                                 <td><s:property value="sede_direccion"/></td>
                                 <td><s:property value="sede_telefono"/></td>                        
                                 <td><s:property value="sede_fecin"/> </td>                        
+                                <td>
+                                    <s:if test="%{sede_bodega.equalsIgnoreCase('S')}">
+                                        BODEGA
+                                    </s:if>
+                                    <s:else>
+                                        PUNTO DE VENTA
+                                    </s:else>
+                                </td>
                                 <td><s:include value="/WEB-INF/TEMPLATE/botones/update.jsp" > 
                                         <s:param name="function">actualizarSede</s:param>
                                         <s:param name="title">Modificar Datos de la sede</s:param>
                                         <s:param name="paramFunction">'<s:text name="sede_sede" />'</s:param>
                                         <s:param name="clase">imagenIcono</s:param>
                                     </s:include>
-                                </td>                          
+                                </td>                                 
                             </tr>
                         </s:iterator>                
                     </table>

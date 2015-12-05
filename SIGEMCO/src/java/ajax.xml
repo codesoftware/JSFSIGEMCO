@@ -70,6 +70,8 @@
         </action>
         <action name="buscaProductosInicio" class="co.com.sigemco.alfa.admin.ajax.AjaxAdministracionAction" method="buscaProductosInicio">
         </action>
+        <action name="buscaCiudades" class="co.com.sigemco.alfa.admin.ajax.AjaxAdministracionAction" method="buscaCiudades">
+        </action>
         <!--Inicio Cancelacion Facturacion Facturacion -->
         <action name="buscaFacturaXId" class="co.com.sigemco.alfa.facturacion.ajax.AjaxCancelaFacturaAction" method="buscaFacturaXId">
         </action>

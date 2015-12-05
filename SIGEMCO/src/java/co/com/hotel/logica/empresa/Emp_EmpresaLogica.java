@@ -50,6 +50,10 @@ public class Emp_EmpresaLogica {
             if (!inserts.equalsIgnoreCase("Ok")) {
                 return inserts;
             }
+            inserts = this.ingresaDepartamentoEmpresa(empresa.getDepartamento());
+            if (!inserts.equalsIgnoreCase("Ok")) {
+                return inserts;
+            }
             rta = "Ok";
         } catch (Exception e) {
             System.out.println("Error Emp_EmpresaLogica.ingresarParametrosPrincempresa " + e);
@@ -505,7 +509,8 @@ public class Emp_EmpresaLogica {
             sql += "       (SELECT para_valor FROM em_tpara where UPPER(para_clave) = 'COMISIONREP') COMISIONREP  ,";
             sql += "       (SELECT para_valor FROM em_tpara where UPPER(para_clave) = 'COMISIONPOST') COMISIONPOST , ";
             sql += "       (SELECT para_valor FROM em_tpara where UPPER(para_clave) = 'SBCUTARJETA') SBCUTARJETA, ";
-            sql += "       (SELECT para_valor FROM em_tpara where UPPER(para_clave) = 'IVAPRVENTA') IVAPRVENTA ";
+            sql += "       (SELECT para_valor FROM em_tpara where UPPER(para_clave) = 'IVAPRVENTA') IVAPRVENTA, ";
+            sql += "       (SELECT para_valor FROM em_tpara where UPPER(para_clave) = 'DEPEMPRESA') DEPEMPRESA ";
             rs = function.enviarSelect(sql);
             while (rs.next()) {
                 if (contador == 0) {
@@ -525,6 +530,7 @@ public class Emp_EmpresaLogica {
                 obj.setSubcuentaBancos(rs.getString("SBCUTARJETA"));
                 obj.setIvaVentas(rs.getString("IVAPRVENTA"));
                 obj.setResolucion(rs.getString("RESOLUCION"));
+                obj.setDepartamento(rs.getString("DEPEMPRESA"));
             }
         } catch (Exception e) {
             System.out.println("Error Emp_EmpresaLogica.obtieneDatosEmpresa " + e);
@@ -681,6 +687,47 @@ public class Emp_EmpresaLogica {
             porcIva = null;
         }
         return porcIva;
+    }
+    
+    /**
+     * Funcion la cual se encarga de ingresa el departamento de la empresa en la base
+     * de datos
+     *
+     * @param nomEmpresa
+     * @return
+     */
+    private String ingresaDepartamentoEmpresa(String depEmpresa) {
+        EnvioFunction function = new EnvioFunction();
+        ResultSet rs = null;
+        String select = "";
+        String sql = "";
+        int cont = 0;
+        try {
+            select += "select COUNT(*)  contador                \n";
+            select += "from em_tpara                            \n";
+            select += "where upper(para_clave) = 'DEPEMPRESA' \n";
+            rs = function.enviarSelect(select);
+            while (rs.next()) {
+                cont = rs.getInt("contador");
+            }
+            if (cont == 0) {
+                sql = "insert into em_tpara(para_clave, para_valor) \n";
+                sql += "values('DEPEMPRESA', '" + depEmpresa + "')   \n";
+
+            } else {
+                sql = "UPDATE em_tpara                          \n";
+                sql += "SET para_valor = '" + depEmpresa + "'         \n";
+                sql += "WHERE upper(para_clave) = 'DEPEMPRESA'\n";
+            }
+            function.enviarUpdate(sql);
+        } catch (Exception e) {
+            System.err.println("Error Emp_EmpresaLogica.ingresaDepartamentoEmpresa");
+            e.printStackTrace();
+            return "Error al insertar el nombre de la empresa: " + e;
+        } finally {
+            function.cerrarConexion();
+        }
+        return "Ok";
     }
 
 }

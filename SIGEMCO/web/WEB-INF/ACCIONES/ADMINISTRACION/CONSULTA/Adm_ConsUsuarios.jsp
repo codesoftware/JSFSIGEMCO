@@ -13,6 +13,7 @@
                 <s:param name="nombre"><s:text name="usuario.apellido"/> <s:text name="usuario.nombre"/></s:param>
                 <s:param name="perfil"><s:text name="usuario.NomPerfil"/></s:param>
                 <s:param name="ultimoIngreso"><s:text name="usuario.ultimoIngreso"/></s:param>
+                <s:param name="acronimo"><s:text name="usuario.acronimo"/></s:param>
             </s:include>
         </s:div>
         <s:div cssClass="navigator">
@@ -62,9 +63,8 @@
                     <div class="row">
                         <div class="form-group col-md-4 col-sm-4 col-xs-4"></div>
                         <div class="form-group col-md-4 col-sm-4 col-xs-4"></div>
-                        <div class="form-group col-md-4 col-sm-4 col-xs-4">   
+                        <div class="form-group col-md-4 col-sm-4 col-xs-4 text-right">   
                             <s:include value="/WEB-INF/TEMPLATE/botones/findUser.jsp" />                       
-                            <s:include value="/WEB-INF/TEMPLATE/botones/report.jsp" />
                         </div>
                     </div>
                 </s:form>
@@ -84,6 +84,7 @@
                                 <th>USUARIO</th>
                                 <th>PERFIL</th>
                                 <th>SEDE</th>
+                                <th>ESTADO</th>
                             </tr>                    
                         </thead>
                         <tbody>
@@ -109,6 +110,15 @@
                                     <td><s:property value="usuario"/></td>
                                     <td><s:property value="NomPerfil"/></td>
                                     <td><s:property value="sede"/></td>
+                                    <td>
+                                        <s:if test="%{estado.equalsIgnoreCase('A')}">
+                                            Activo
+                                        </s:if>
+                                        <s:else>
+                                            Inactivo
+                                        </s:else>
+                                        <!--<s:property value="estado"/>-->
+                                    </td>
                                 </tr>
                             </s:iterator>
                         </tbody>

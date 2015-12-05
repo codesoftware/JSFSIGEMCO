@@ -125,6 +125,10 @@ public class Inv_ProductoAccion extends ActionSupport implements SessionAware, U
         } else if (producto.getIva().equalsIgnoreCase("-1")) {
             addActionError("Seleccione una de las opciones de la lista Gravamen");
         }
+        
+        if("-1".equalsIgnoreCase(producto.getProveedores())){
+            addActionError("Por favor seleccione un proveedor ");
+        }
 //        boolean dup = duplicados.verificaCodigo(producto.getCodigo());
 //        if (dup == false) {
 //            addActionError("El codigo ingresado ya esta referenciado a otro producto");

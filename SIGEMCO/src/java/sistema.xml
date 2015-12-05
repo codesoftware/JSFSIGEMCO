@@ -43,6 +43,7 @@
             <result name="inv_con_producto">/WEB-INF/ACCIONES/INVENTARIOS/CONSULTA/Inv_ConsProducto.jsp</result>
             <result name="inv_con_servicio">/WEB-INF/ACCIONES/INVENTARIOS/CONSULTA/Inv_ConsGenServ.jsp</result>
             <result name="inv_upd_producto">/WEB-INF/ACCIONES/INVENTARIOS/MODIFICAR/Inv_UpdProducto.jsp</result>
+            <result name="inv_ges_producto">/WEB-INF/ACCIONES/INVENTARIOS/CONSULTA/Inv_GestionProductos.jsp</result>
             <result name="rep_inv_ponderado">/WEB-INF/ACCIONES/REPORTES/JSP/inv_reporteinventario.jsp</result>
             <result name="rep_inv_basicos">/WEB-INF/ACCIONES/REPORTES/JSP/Inv_reportesGenerales.jsp</result>
             <result name="inv_upd_servicio">/WEB-INF/ACCIONES/INVENTARIOS/MODIFICAR/Inv_UpdServicio.jsp</result>
@@ -76,6 +77,8 @@
             <result name="inv_ins_categoria">/WEB-INF/ACCIONES/INVENTARIOS/CREACION/Inv_InsertCategoria.jsp</result>
             <result name="inv_con_celular">/WEB-INF/ACCIONES/INVENTARIOS/CONSULTA/Inv_ConsGenRemision.jsp</result>
             <result name="adm_ins_parempre">/WEB-INF/ACCIONES/ADMINISTRACION/CREACION/Adm_ParamGenerales.jsp</result>
+            <result name="adm_ins_logo">/WEB-INF/ACCIONES/ADMINISTRACION/CREACION/Adm_InsertLogo.jsp</result>
+            
             <result name="con_consgenclases">/WEB-INF/ACCIONES/CONTABILIDAD/CONSULTA/Con_ConsGenClase.jsp</result>
             <result name="inv_cam_sedeprodu">/WEB-INF/ACCIONES/INVENTARIOS/MODIFICAR/Inv_CambioSedeProd.jsp</result>
             <result name="inv_cor_ingproduc">/WEB-INF/ACCIONES/INVENTARIOS/MODIFICAR/Inv_CorrIngProductos.jsp</result>

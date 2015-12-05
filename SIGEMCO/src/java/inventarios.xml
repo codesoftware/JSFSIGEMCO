@@ -182,5 +182,10 @@
             <result name="input">/WEB-INF/ACCIONES/FACTURACION/MODIFICAR/Fact_ModificaPantallaFacturacion.jsp</result>
             <result name="error">/WEB-INF/ACCIONES/FACTURACION/MODIFICAR/Fact_ModificaPantallaFacturacion.jsp</result>
         </action>     
+        <action name="inv_consCierre" class="co.com.sigemco.alfa.contabilidad.action.CierreDiarioAction" method="consultaCierres">
+            <result name="success">/WEB-INF/ACCIONES/REPORTES/JSP/inv_CierreDiario.jsp</result>
+            <result name="input">/WEB-INF/ACCIONES/REPORTES/JSP/inv_CierreDiario.jsp</result>
+            <result name="error">/WEB-INF/ACCIONES/REPORTES/JSP/inv_CierreDiario.jsp</result>
+        </action>    
     </package>
 </struts>

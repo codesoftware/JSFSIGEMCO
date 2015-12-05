@@ -13,6 +13,7 @@
                 <s:param name="nombre"><s:text name="usuario.apellido"/> <s:text name="usuario.nombre"/></s:param>
                 <s:param name="perfil"><s:text name="usuario.NomPerfil"/></s:param>
                 <s:param name="ultimoIngreso"><s:text name="usuario.ultimoIngreso"/></s:param>
+                <s:param name="acronimo"><s:text name="usuario.acronimo"/></s:param>
             </s:include>
         </s:div>
         <s:div cssClass="navigator">
@@ -60,6 +61,14 @@
                             <tr>
                                 <td>Teléfono:</td>
                                 <td><s:textfield cssClass="form-control" name="sede.sede_telefono" /></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Marcar como Bodega:
+                                </td>
+                                <td>
+                                    <s:select list="yesNo" cssClass="form-control" headerValue="Aplica Bodega" headerKey="-1" name="sede.sede_bodega" />
+                                </td>
                             </tr>
                         </tbody>
                         <tr>

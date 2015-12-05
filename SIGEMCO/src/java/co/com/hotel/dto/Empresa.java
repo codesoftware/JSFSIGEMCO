@@ -24,6 +24,7 @@ public class Empresa {
     private String comisionReposicion;
     private String subcuentaBancos;
     private String resolucion;
+    private String departamento;
 
     public String getResolucion() {
         return resolucion;
@@ -32,7 +33,7 @@ public class Empresa {
     public void setResolucion(String resolucion) {
         this.resolucion = resolucion;
     }
-    
+
     public String getNombre() {
         return nombre;
     }
@@ -127,6 +128,14 @@ public class Empresa {
 
     public void setIvaVentas(String ivaVentas) {
         this.ivaVentas = ivaVentas;
+    }
+
+    public String getDepartamento() {
+        return departamento;
+    }
+
+    public void setDepartamento(String departamento) {
+        this.departamento = departamento;
     }
 
 }

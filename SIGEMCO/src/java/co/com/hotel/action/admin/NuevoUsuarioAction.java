@@ -198,6 +198,10 @@ public class NuevoUsuarioAction extends ActionSupport implements SessionAware, U
         if (usuaNuevo.getTipoUsuario().equalsIgnoreCase("-1")) {
             addActionError("Por favor eliga un perfil para el nuevo usuario");
         }
+        //Valida si la fecha ingresada es anterior a 18 años
+        if(!valida.validaMayorDeEdad(usuaNuevo.getFechaNacimiento())){
+            addActionError("La fecha ingresada debe ser mayor a 18 años");
+        }
         Adm_PerfilLogica periflObj = new Adm_PerfilLogica();
         setPerfiles(periflObj.obtieneNomPerfil());
         Adm_SedeLogica sedeLogica = new Adm_SedeLogica();

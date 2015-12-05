@@ -70,6 +70,14 @@
                                 <td><h4>Estado</h4></td>
                                 <td><s:select  list="estadoMap"  name="sede.sede_estado" required="true" headerKey="-1" headerValue="Estado" cssClass="form-control"/></td>
                             </tr>
+                            <tr>
+                                <td>
+                                    Marcar como Bodega:
+                                </td>
+                                <td>
+                                    <s:select list="yesNo" cssClass="form-control" headerValue="Aplica Bodega" headerKey="-1" name="sede.sede_bodega" />
+                                </td>
+                            </tr>
                         </tbody>
                         <tfoot>
                             <tr style="text-align: right">

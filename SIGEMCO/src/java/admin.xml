@@ -111,5 +111,9 @@
             <result name="success">/WEB-INF/ACCIONES/ADMINISTRACION/MODIFICAR/Adm_UpdSede.jsp</result>
             <result name="error">/inicio.jsp</result>
         </action>
+        <action name="adm_subirLogo" class="co.com.sigemco.alfa.admin.action.LogoAction" method="cargaImagen">
+            <result name="success">/WEB-INF/ACCIONES/ADMINISTRACION/CREACION/Adm_InsertLogo.jsp</result>
+            <result name="input">/WEB-INF/ACCIONES/ADMINISTRACION/CREACION/Adm_InsertLogo.jsp</result>
+        </action>
     </package>
 </struts>

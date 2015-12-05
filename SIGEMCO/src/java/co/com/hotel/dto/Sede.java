@@ -10,13 +10,15 @@ package co.com.hotel.dto;
  * @author Personal
  */
 public class Sede {
-    private String  sede_sede;
-    private String  sede_nombre;
-    private String  sede_direccion;
-    private String  sede_telefono;
-    private String  sede_fecin;
-    private String  sede_tius;
-    private String  sede_estado;
+
+    private String sede_sede;
+    private String sede_nombre;
+    private String sede_direccion;
+    private String sede_telefono;
+    private String sede_fecin;
+    private String sede_tius;
+    private String sede_estado;
+    private String sede_bodega;
 
     public String getSede_sede() {
         return sede_sede;
@@ -73,8 +75,13 @@ public class Sede {
     public void setSede_estado(String sede_estado) {
         this.sede_estado = sede_estado;
     }
-    
-    
 
-    
+    public String getSede_bodega() {
+        return sede_bodega;
+    }
+
+    public void setSede_bodega(String sede_bodega) {
+        this.sede_bodega = sede_bodega;
+    }
+
 }

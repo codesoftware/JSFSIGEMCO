@@ -51,8 +51,8 @@
         <div class="row">
             <div class="col-md-3 col-xs-0 col-sm-0"></div>
             <div class="col-md-6 col-xs-12 col-sm-12">
-                <s:form name="inv_consCierre" action="inv_consCierre" theme="simple">
-                    <s:textfield name="accion" cssStyle="display:none" value="cierreDiario"/>
+                <s:form name="inv_consCierre" action="inv_consCierre" id="inv_consCierre" theme="simple">
+                    <s:textfield name="accion" cssStyle="display:none" value="consulta"/>
                     <div class="form-group col-md-12 col-sm-12 col-xs-12 thumbnail">
                         <div class="row">
                             <div class="form-group col-md-12 col-sm-12 col-xs-12 ">
@@ -101,6 +101,35 @@
                         </div>                        
                     </div>                    
                 </s:form>
+            </div>
+            <div class="col-md-3 col-xs-0 col-sm-0"></div>
+        </div>
+        <br/>
+        <div class="row">
+            <div class="col-md-3 col-xs-0 col-sm-0"></div>
+            <div class="col-md-6 col-xs-12 col-sm-12">
+                <s:if test="%{listaCierres != null}">
+                    <table class="table table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Sede</th>
+                                <th>Fecha</th>
+                                <th>Valor</th>
+                            </tr> 
+                        </thead>
+                        <tbody>
+                            <s:iterator value="listaCierres">
+                                <tr>
+                                    <td><s:property value="cier_cier"/></td>
+                                    <td><s:property value="nombreSede"/></td>
+                                    <td><s:property value="cier_fech"/></td>
+                                    <td> $ <s:property value="cier_vlrt"/></td>
+                                </tr>
+                            </s:iterator>
+                        </tbody>
+                    </table>
+                </s:if>
             </div>
             <div class="col-md-3 col-xs-0 col-sm-0"></div>
         </div>

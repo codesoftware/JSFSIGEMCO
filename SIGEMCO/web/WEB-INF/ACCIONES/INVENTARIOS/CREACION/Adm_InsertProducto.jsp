@@ -16,6 +16,7 @@
                 <s:param name="nombre"><s:text name="usuario.apellido"/> <s:text name="usuario.nombre"/></s:param>
                 <s:param name="perfil"><s:text name="usuario.NomPerfil"/></s:param>
                 <s:param name="ultimoIngreso"><s:text name="usuario.ultimoIngreso"/></s:param>
+                <s:param name="acronimo"><s:text name="usuario.acronimo"/></s:param>
             </s:include>
         </s:div>
         <s:div cssClass="navigator">
@@ -127,11 +128,11 @@
                                     </tr>
                                     <tr>
                                         <td>Cantidad:</td>
-                                        <td><s:textfield name="producto.cantidad" requiered="true" cssClass="form-control" id="producto_cantidad" onkeypress="return validaNumeros(event)" /></td>
+                                        <td><s:textfield name="producto.cantidad" requiered="true" cssClass="form-control" id="producto_cantidad" onkeypress="return validaNumeros(event)" maxLength="4"/></td>
                                     </tr>
                                     <tr>
                                         <td>Costo:</td>
-                                        <td><s:textfield name="producto.costo" requiered="true" title="Este es el costo unitario de cada producto que va ha ingresar" cssClass="form-control" id="producto_costo" onblur="cambioVlr(this.value)" onkeypress="return validaNumeros(event)" onkeyup="mascaraMoneda(this)"/></td>
+                                        <td><s:textfield name="producto.costo" requiered="true" title="Este es el costo unitario de cada producto que va ha ingresar" cssClass="form-control" id="producto_costo" onblur="cambioVlr(this.value)" onkeypress="return validaNumeros(event)" onkeyup="mascaraMoneda(this)" maxLength="6"/></td>
                                     </tr>
                                     <tr>
                                         <td>Gravamen:</td>

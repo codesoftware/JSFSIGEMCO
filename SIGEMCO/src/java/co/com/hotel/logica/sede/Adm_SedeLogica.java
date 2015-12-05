@@ -30,8 +30,8 @@ public class Adm_SedeLogica {
         EnvioFunction function = new EnvioFunction();
         String resultado = "OK";
         try {
-            String sql = "INSERT INTO EM_TSEDE (SEDE_NOMBRE,SEDE_DIRECCION,SEDE_TELEFONO,SEDE_TIUS) VALUES "
-                    + "('" + objTO.getSede_nombre() + "','" + objTO.getSede_direccion() + "','" + objTO.getSede_telefono() + "','" + UsuarioLogeado + "')";
+            String sql = "INSERT INTO EM_TSEDE (SEDE_NOMBRE,SEDE_DIRECCION,SEDE_TELEFONO,SEDE_TIUS,SEDE_BODEGA) VALUES "
+                    + "('" + objTO.getSede_nombre() + "','" + objTO.getSede_direccion() + "','" + objTO.getSede_telefono() + "','" + UsuarioLogeado + "','"+objTO.getSede_bodega()+"')";
             boolean valida = function.enviarUpdate(sql);
             if (!valida) {
                 resultado = "Error";
@@ -58,7 +58,7 @@ public class Adm_SedeLogica {
     public ArrayList<Sede> consultaGeneralSede(String filtro) throws SQLException {
         ArrayList<Sede> resultado = null;
         String sql = "select sede_sede id, sede_nombre nombre, sede_direccion direccion, sede_estado estado, sede_telefono telefono, \n";
-        sql += "to_char(sede_fecin, 'dd/mm/yyyy') fecha \n";
+        sql += "to_char(sede_fecin, 'dd/mm/yyyy') fecha, sede_bodega \n";
         sql += "from em_tsede\n";
         sql += "where upper(sede_estado) = upper(";
         if (filtro.equalsIgnoreCase("A")) {
@@ -82,6 +82,7 @@ public class Adm_SedeLogica {
                 auxSede.setSede_sede(rs.getString("id"));
                 auxSede.setSede_telefono(rs.getString("telefono"));
                 auxSede.setSede_fecin(rs.getString("fecha"));
+                auxSede.setSede_bodega(rs.getString("sede_bodega"));
                 resultado.add(auxSede);
             }
         }
@@ -129,12 +130,13 @@ public class Adm_SedeLogica {
         String sql = "";
         String rta = "Ok";
 
-        try (EnvioFunction function = new EnvioFunction();) {
+        try (EnvioFunction function = new EnvioFunction()) {
             sql = sql.concat("UPDATE em_tsede SET sede_nombre = '"
                     .concat(objTo.getSede_nombre()).concat("',")
                     .concat("sede_direccion = '").concat(objTo.getSede_direccion()).concat("',")
                     .concat("sede_telefono = '").concat(objTo.getSede_telefono()).concat("',")
-                    .concat("sede_estado= '").concat(objTo.getSede_estado()).concat("'")
+                    .concat("sede_estado= '").concat(objTo.getSede_estado()).concat("',")
+                    .concat("sede_bodega = '").concat(objTo.getSede_bodega()).concat("'")
                     .concat(" WHERE sede_sede = ").concat(objTo.getSede_sede())
             );
             boolean validaUpd = function.enviarUpdate(sql);
@@ -158,7 +160,7 @@ public class Adm_SedeLogica {
         Sede sede = null;
         String sql = "";
         try (EnvioFunction function = new EnvioFunction();) {
-            sql = "SELECT sede_sede, sede_nombre, sede_direccion, sede_telefono, sede_fecin,sede_tius, sede_estado FROM em_tsede WHERE sede_sede = '" + id + "' ";
+            sql = "SELECT sede_sede, sede_nombre, sede_direccion, sede_telefono, sede_fecin,sede_tius, sede_estado, sede_bodega FROM em_tsede WHERE sede_sede = '" + id + "' ";
             ResultSet rs = function.enviarSelect(sql);
             while (rs.next()) {
                 sede = new Sede();
@@ -169,6 +171,7 @@ public class Adm_SedeLogica {
                 sede.setSede_fecin(rs.getString("sede_fecin"));
                 sede.setSede_tius(rs.getString("sede_tius"));
                 sede.setSede_estado(rs.getString("sede_estado"));
+                sede.setSede_bodega(rs.getString("sede_bodega"));
             }
 
         } catch (Exception e) {

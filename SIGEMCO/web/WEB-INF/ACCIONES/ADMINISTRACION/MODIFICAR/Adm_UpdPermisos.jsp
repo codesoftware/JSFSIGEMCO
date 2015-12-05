@@ -133,6 +133,12 @@
                                                         <td style="width: 20%"><input type="checkbox" value="AdEm2" id="AdEm2"></td>
                                                         <%}%>
                                                     </tr>
+                                                    <tr>
+                                                        <%if (!logica.consultaPermiso("PARAMETROS GENERALES").equalsIgnoreCase("I")) {%>
+                                                        <td>Logo Empresarial</td>
+                                                        <td><input type="checkbox" value="AdEm3" id="AdEm3"></td>
+                                                        <%}%>
+                                                    </tr>
                                                 </tbody>
                                             </table>
                                             <%}%>

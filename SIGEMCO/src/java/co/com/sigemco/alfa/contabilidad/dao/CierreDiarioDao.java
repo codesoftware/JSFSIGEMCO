@@ -91,5 +91,24 @@ public class CierreDiarioDao {
         //System.out.println(select);
         return select;
     }
+    
+    /**
+     * Funcion con la cual se crea el sql para la consulta de cierres 
+     * @return 
+     */
+    public String consultaCierres(String fecha, String sede){
+        StringBuilder sql = new StringBuilder();
+        sql.append("SELECT cier_cier, to_char(cier_fech,'dd/mm/yyyy') cier_fech, cier_usua, to_char(cier_vlri,'9,999,999,999.00') cier_vlri, to_char(cier_vlrt,'9,999,999,999.00') cier_vlrt, cier_vlrc, ");
+        sql.append(" cier_sede, cier_estado, sede_nombre  "); 
+        sql.append("FROM ad_tcier,em_tsede ");
+        sql.append(" where cier_fech >= '");
+        sql.append(fecha);
+        sql.append("'");
+        sql.append(" and cier_sede = ");
+        sql.append(sede);
+        sql.append(" and sede_sede = cier_sede");
+        sql.append(" order by cier_cier desc");
+        return sql.toString();
+    }
 
 }

@@ -15,6 +15,7 @@ import co.com.hotel.logica.perfil.Adm_PerfilLogica;
 import co.com.hotel.logica.sede.Adm_SedeLogica;
 import co.com.hotel.logica.usuarios.Adm_UsuarioLogica;
 import co.com.hotel.utilidades.UsuarioHabilitado;
+import co.com.sigemco.alfa.admin.logica.DepartamentoLogica;
 import co.com.sigemco.alfa.contabilidad.dto.ClaseDto;
 import co.com.sigemco.alfa.contabilidad.logica.ClaseLogica;
 import co.com.sigemco.alfa.inventario.dto.PantallaPrincipalDto;
@@ -54,6 +55,7 @@ public class reenvioGeneral extends ActionSupport implements UsuarioHabilitado, 
     public static final int ADM_CON_PERFIL = 124;
     public static final int ADM_INS_EMPRESA = 131;   //Informacion general de la empresa
     public static final int ADM_INS_PAREMPRE = 132;   //Informacion general de la empresa
+    public static final int ADM_INS_LOGO = 133;   //Informacion general de la empresa
 
     public static final int ADM_INS_SEDE = 141;   //
     public static final int ADM_UPD_SEDE = 142;   //
@@ -64,6 +66,7 @@ public class reenvioGeneral extends ActionSupport implements UsuarioHabilitado, 
     public static final int ADM_REPORTE_GRAL = 152;
     //MODULO INVENTARIOS (Primer digito 2)
     public static final int INV_INS_PRODUCTO = 211;
+    public static final int INV_GES_PRODUCTO = 217;
     public static final int INV_INS_PRODEXIS = 219; //El ultimo digito es nueve ya que  ya existe la insercion de productos
     public static final int INV_UPD_PRODUCTO = 212;
     public static final int INV_CON_PRODUCTO = 214;
@@ -182,6 +185,7 @@ public class reenvioGeneral extends ActionSupport implements UsuarioHabilitado, 
     //Mapa para consultar los parametros detallados de la empresa
     private Map<String, String> parametrosEspeciales;
     private String parametrosComparar;
+    private Map<String, String> departamentos;
 
     /**
      *
@@ -249,11 +253,19 @@ public class reenvioGeneral extends ActionSupport implements UsuarioHabilitado, 
                     nextPage = "adm_ins_empresa";
                     logicaEmp = new Emp_EmpresaLogica();
                     empresa = logicaEmp.obtieneDatosEmpresa();
+                    DepartamentoLogica logicaDep = new DepartamentoLogica();
+                    this.departamentos = logicaDep.obtieneListaDepartamentos(1);
+                    break;
+                case INV_GES_PRODUCTO:
+                    nextPage = "inv_ges_producto";
                     break;
                 case ADM_INS_PAREMPRE:
                     logicaEmp = new Emp_EmpresaLogica();
                     empresa = logicaEmp.obtieneDatosEmpresa();
                     nextPage = "adm_ins_parempre";
+                    break;
+                case ADM_INS_LOGO:
+                    nextPage = "adm_ins_logo";
                     break;
                 case INV_INS_PRODUCTO:
                     nextPage = "inv_ins_producto";
@@ -592,6 +604,9 @@ public class reenvioGeneral extends ActionSupport implements UsuarioHabilitado, 
                     break;
                 case ADM_INS_SEDE:
                     nextPage = "adm_ins_sede";
+                    this.yesNo = new HashMap<String, String>();
+                    this.yesNo.put("S", "Si");
+                    this.yesNo.put("N", "No");
                     break;
                 case CON_CONSGENCLASES:
                     logicaClase = new ClaseLogica();
@@ -942,6 +957,14 @@ public class reenvioGeneral extends ActionSupport implements UsuarioHabilitado, 
 
     public void setParametrosComparar(String parametrosComparar) {
         this.parametrosComparar = parametrosComparar;
+    }
+
+    public Map<String, String> getDepartamentos() {
+        return departamentos;
+    }
+
+    public void setDepartamentos(Map<String, String> departamentos) {
+        this.departamentos = departamentos;
     }
 
 }

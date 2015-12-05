@@ -79,13 +79,6 @@ AND TIUS_ESTADO = case when UPPER($P{ESTADO_DS}) = '-1' THEN TIUS_ESTADO ELSE UP
 				</textElement>
 				<text><![CDATA[USUARIOS DE LA APLICACION]]></text>
 			</staticText>
-			<textField>
-				<reportElement x="0" y="20" width="555" height="30" uuid="5e54bc20-8849-47e9-98e2-f372c43a0249"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="15" isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{para_valor}]]></textFieldExpression>
-			</textField>
 		</band>
 	</pageHeader>
 	<detail>

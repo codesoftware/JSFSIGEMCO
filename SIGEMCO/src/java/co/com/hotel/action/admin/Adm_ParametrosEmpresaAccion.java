@@ -10,6 +10,7 @@ import co.com.hotel.dto.Empresa;
 import co.com.hotel.logica.empresa.Emp_EmpresaLogica;
 import co.com.hotel.utilidades.ManejoString;
 import co.com.hotel.utilidades.UsuarioHabilitado;
+import co.com.sigemco.alfa.admin.logica.DepartamentoLogica;
 import com.opensymphony.xwork2.ActionSupport;
 import java.util.Map;
 import org.apache.struts2.interceptor.SessionAware;
@@ -23,6 +24,7 @@ public class Adm_ParametrosEmpresaAccion extends ActionSupport implements Sessio
     private Usuario usuario;
     private Map session;
     private Empresa empresa;
+    private Map<String, String> departamentos;
 
     /**
      * Accion encargada de insertar la informacion general de la empresa
@@ -32,6 +34,8 @@ public class Adm_ParametrosEmpresaAccion extends ActionSupport implements Sessio
     public String modificarParametros() {
         Emp_EmpresaLogica logica = null;
         try {
+            DepartamentoLogica logicaDep = new DepartamentoLogica();
+            this.departamentos = logicaDep.obtieneListaDepartamentos(1);
             logica = new Emp_EmpresaLogica();
             String rta = logica.ingresarParametrosPrincempresa(empresa);
             if (rta.equalsIgnoreCase("Ok")) {
@@ -95,6 +99,14 @@ public class Adm_ParametrosEmpresaAccion extends ActionSupport implements Sessio
 
     public void setEmpresa(Empresa empresa) {
         this.empresa = empresa;
+    }
+
+    public Map<String, String> getDepartamentos() {
+        return departamentos;
+    }
+
+    public void setDepartamentos(Map<String, String> departamentos) {
+        this.departamentos = departamentos;
     }
 
 }
