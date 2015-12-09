@@ -529,6 +529,12 @@
                                                         <td>Pantalla Principal</td>
                                                         <td><input type="checkbox" value="FcCr6" id="FcCr6"/></td>
                                                     </tr>
+                                                    <tr>
+                                                        <td>Pedidos</td>
+                                                        <td><input type="checkbox" value="FcCr7" id="FcCr7"/></td>
+                                                        <td>Precio Editable</td>
+                                                        <td><input type="checkbox" value="FcCr8" id="FcCr8"/></td>
+                                                    </tr>
                                                 </tbody>
                                             </table>
                                         </div>
