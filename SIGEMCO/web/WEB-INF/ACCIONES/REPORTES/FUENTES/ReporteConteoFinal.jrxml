@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="515" leftMargin="40" rightMargin="40" topMargin="20" bottomMargin="20" uuid="495d2379-5084-4d0b-9167-785624241384">
-	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.zoom" value="1.3310000000000004"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<style name="table">
@@ -23,7 +23,7 @@
 			<pen lineWidth="0.5" lineColor="#000000"/>
 		</box>
 	</style>
-	<subDataset name="TablaConteo" uuid="c0da5132-70b1-47a5-9230-19c965cabf93">
+	<subDataset name="TablaConteo_1" uuid="c98f6500-3aa7-45d8-9ecc-b32591c338db">
 		<parameter name="copr_copr_t" class="java.lang.String">
 			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 		</parameter>
@@ -60,9 +60,13 @@ order by dska_dska]]>
 	, COPR_DESC
 	, (select para_valor from em_tpara where para_clave = 'NOMBREEMPRESA') NOMBREEMPRESA
 	, (select para_valor from em_tpara where para_clave = 'NIT') NIT
-FROM IN_TCOPR, EM_TSEDE
+    ,dska_cod,dska_nom_prod, ecop_existencias, ecop_diferencia, ecop_valor,dska_dska
+FROM IN_TCOPR, EM_TSEDE,in_tdska,in_tecop
 WHERE COPR_SEDE = SEDE_SEDE
-AND COPR_COPR = CAST($P{copr_copr} AS int)]]>
+AND COPR_COPR = CAST($P{copr_copr} AS int)
+AND dska_dska = ecop_dska
+and ecop_copr = COPR_COPR
+order by dska_dska]]>
 	</queryString>
 	<field name="copr_fecha" class="java.lang.String">
 		<fieldDescription><![CDATA[Fecha en la cual se creo el inventario]]></fieldDescription>
@@ -79,8 +83,24 @@ AND COPR_COPR = CAST($P{copr_copr} AS int)]]>
 	</field>
 	<field name="nombreempresa" class="java.lang.String"/>
 	<field name="nit" class="java.lang.String"/>
+	<field name="dska_cod" class="java.lang.String"/>
+	<field name="dska_nom_prod" class="java.lang.String">
+		<fieldDescription><![CDATA[Nombre que identifica al producto]]></fieldDescription>
+	</field>
+	<field name="ecop_existencias" class="java.lang.Integer">
+		<fieldDescription><![CDATA[Existencias del producto en la sede del inventario a la fecha de cierre del conteo]]></fieldDescription>
+	</field>
+	<field name="ecop_diferencia" class="java.lang.Integer">
+		<fieldDescription><![CDATA[Diferencia entre los valores del conteo y las existencias que deberian haber en la sede]]></fieldDescription>
+	</field>
+	<field name="ecop_valor" class="java.lang.Integer">
+		<fieldDescription><![CDATA[Numero de valores del producto]]></fieldDescription>
+	</field>
+	<field name="dska_dska" class="java.lang.Integer">
+		<fieldDescription><![CDATA[Identificador primario de la tabla]]></fieldDescription>
+	</field>
 	<title>
-		<band height="100" splitType="Stretch">
+		<band height="90" splitType="Stretch">
 			<frame>
 				<reportElement x="0" y="0" width="512" height="90" uuid="9e359994-d8ce-451d-92fb-78e81d941641"/>
 				<box>
@@ -172,109 +192,107 @@ AND COPR_COPR = CAST($P{copr_copr} AS int)]]>
 			</frame>
 		</band>
 	</title>
+	<columnHeader>
+		<band height="20">
+			<staticText>
+				<reportElement x="0" y="0" width="68" height="20" uuid="4a788f71-1299-4655-b586-413c452de8ba"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Codigo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="68" y="0" width="192" height="20" uuid="1d53d776-e502-408e-9b02-b787babb1425"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="260" y="0" width="85" height="20" uuid="7810bf9d-599e-499a-9aeb-f911c9f0f34e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Existencias]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="345" y="0" width="85" height="20" uuid="3dafa64d-a5ff-40f8-955b-522878541c29"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Diferencia]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="430" y="0" width="85" height="20" uuid="c8d5d657-2f86-4c2f-af62-d9eb614bd329"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Valor]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
 	<detail>
-		<band height="50" splitType="Stretch">
-			<componentElement>
-				<reportElement key="table" style="table" x="0" y="0" width="512" height="50" uuid="7e8a834f-726c-4b12-bb07-588272b52b7d"/>
-				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
-					<datasetRun subDataset="TablaConteo" uuid="4da24eca-fdc2-42d0-a016-a3a02a51e873">
-						<datasetParameter name="copr_copr_t">
-							<datasetParameterExpression><![CDATA[$P{copr_copr}]]></datasetParameterExpression>
-						</datasetParameter>
-						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-					</datasetRun>
-					<jr:column width="90" uuid="9fb7e088-f213-48d0-b30f-9e8cbc702d99">
-						<jr:columnHeader style="table" height="30" rowSpan="1">
-							<staticText>
-								<reportElement x="0" y="0" width="90" height="30" uuid="2be4752e-d596-4b2e-bf10-fb3be1c20688"/>
-								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font size="12" isBold="true"/>
-								</textElement>
-								<text><![CDATA[CODIGO]]></text>
-							</staticText>
-						</jr:columnHeader>
-						<jr:detailCell style="table_TD" height="20" rowSpan="1">
-							<textField>
-								<reportElement x="0" y="0" width="90" height="20" uuid="4a687e61-bbf1-4663-92e2-0e2a042e2eaf"/>
-								<textElement textAlignment="Center" verticalAlignment="Middle"/>
-								<textFieldExpression><![CDATA[$F{dska_cod}]]></textFieldExpression>
-							</textField>
-						</jr:detailCell>
-					</jr:column>
-					<jr:column width="120" uuid="273fd9fa-e25c-472f-a892-ef3c339636f7">
-						<jr:columnHeader style="table" height="30" rowSpan="1">
-							<staticText>
-								<reportElement x="0" y="0" width="120" height="30" uuid="e6e8842a-ea79-47cc-b9d5-bc201d8facbf"/>
-								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font size="12" isBold="true"/>
-								</textElement>
-								<text><![CDATA[NOMBRE PROD.]]></text>
-							</staticText>
-						</jr:columnHeader>
-						<jr:detailCell style="table_TD" height="20" rowSpan="1">
-							<textField>
-								<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="120" height="20" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" uuid="fe964419-bd1b-406e-b000-4df0973b4533"/>
-								<textElement textAlignment="Center" verticalAlignment="Middle"/>
-								<textFieldExpression><![CDATA[$F{dska_nom_prod}]]></textFieldExpression>
-							</textField>
-						</jr:detailCell>
-					</jr:column>
-					<jr:column width="100" uuid="8eedb7d7-33f5-4352-949a-bdc52a1e9e0a">
-						<jr:columnHeader style="table" height="30" rowSpan="1">
-							<staticText>
-								<reportElement x="0" y="0" width="100" height="30" uuid="464c2141-211f-408d-a9cf-7dd4b275b367"/>
-								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font size="12" isBold="true"/>
-								</textElement>
-								<text><![CDATA[EXIST. SEDE]]></text>
-							</staticText>
-						</jr:columnHeader>
-						<jr:detailCell style="table_TD" height="20" rowSpan="1">
-							<textField>
-								<reportElement x="0" y="0" width="100" height="20" uuid="a75f6a96-1746-4761-a570-10dbc7fc2e42"/>
-								<textElement textAlignment="Center" verticalAlignment="Middle"/>
-								<textFieldExpression><![CDATA[$F{ecop_existencias}]]></textFieldExpression>
-							</textField>
-						</jr:detailCell>
-					</jr:column>
-					<jr:column width="100" uuid="3e0c5314-6192-4d83-ab55-446a30fd5a4c">
-						<jr:columnHeader style="table" height="30" rowSpan="1">
-							<staticText>
-								<reportElement x="0" y="0" width="100" height="30" uuid="ecb6a570-88cf-45d1-8f4d-55f11b2edbab"/>
-								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font size="12" isBold="true"/>
-								</textElement>
-								<text><![CDATA[DIFERENCIA]]></text>
-							</staticText>
-						</jr:columnHeader>
-						<jr:detailCell style="table_TD" height="20" rowSpan="1">
-							<textField>
-								<reportElement x="0" y="0" width="100" height="20" uuid="6acacbfd-b832-4f13-8e5c-cf710cd25269"/>
-								<textElement textAlignment="Center" verticalAlignment="Middle"/>
-								<textFieldExpression><![CDATA[$F{ecop_diferencia}]]></textFieldExpression>
-							</textField>
-						</jr:detailCell>
-					</jr:column>
-					<jr:column width="100" uuid="d801fc12-d75e-404f-8849-4036123e42c3">
-						<jr:columnHeader style="table" height="30" rowSpan="1">
-							<staticText>
-								<reportElement x="0" y="0" width="100" height="30" uuid="0b3a4804-f856-443a-b94a-45abf3d56ee0"/>
-								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font size="12" isBold="true"/>
-								</textElement>
-								<text><![CDATA[CONTEO]]></text>
-							</staticText>
-						</jr:columnHeader>
-						<jr:detailCell style="table_TD" height="20" rowSpan="1">
-							<textField>
-								<reportElement x="0" y="0" width="100" height="20" uuid="7440361c-536d-47a0-8f0c-7dd3e62cbead"/>
-								<textElement textAlignment="Center" verticalAlignment="Middle"/>
-								<textFieldExpression><![CDATA[$F{ecop_valor}]]></textFieldExpression>
-							</textField>
-						</jr:detailCell>
-					</jr:column>
-				</jr:table>
-			</componentElement>
+		<band height="25" splitType="Stretch">
+			<textField>
+				<reportElement x="68" y="0" width="192" height="25" uuid="5eefc5ac-238a-4813-8279-ac2422011875"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{dska_nom_prod}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="260" y="0" width="85" height="25" uuid="57fa24e2-fce3-475c-ab90-e1b202f59820"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{ecop_existencias}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="345" y="0" width="85" height="25" uuid="95d05fc6-f768-4828-8c1c-ecf2b99b9940"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{ecop_diferencia}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="430" y="0" width="85" height="25" uuid="b77c7c21-bd7e-42e5-aead-2397d4573b27"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{ecop_valor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="68" height="25" uuid="de473ec1-f3a8-4e7b-9081-dd7933ac64b5"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{dska_cod}]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
 </jasperReport>
