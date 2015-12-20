@@ -49,7 +49,7 @@ public class EnviarCorreoIns {
         this.session = Session.getDefaultInstance(this.config,
                 new javax.mail.Authenticator() {
                     protected PasswordAuthentication getPasswordAuthentication() {
-                        return new PasswordAuthentication("johnmorenoing@gmail.com", "645211012325270");
+                        return new PasswordAuthentication("johnmorenoing@gmail.com", "1qazxsw23EDC");
                     }
                 });
     }

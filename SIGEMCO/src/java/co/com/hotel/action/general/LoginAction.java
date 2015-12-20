@@ -47,39 +47,51 @@ public class LoginAction extends ActionSupport implements SessionAware {
      * @return
      */
     public String execute() {
-        ConfirmaDatos confirma = new ConfirmaDatos();
-        //Confirma si el los datos que ingreso el usuario tienen acceso al sistema
-        RetornoLoginDto acceso = confirma.confimaUsuario(this.user, this.pass);
-        if (acceso.isAcceso()) {
-            //Recuperamos el objeto con todos los datos del usuario
-            RecuperaUsuario recuperaUsuario = new RecuperaUsuario();
-            this.usuario = recuperaUsuario.recuperaDatosUsuario(this.user);
-            this.usuario.setCambioContra(acceso.getUpdate());
-            this.usuario.setUsuario(this.user);
-            //Obtengo el acronimo de la aplicacion
-            AdministracionLogica objLogAdm = new AdministracionLogica();
-            this.usuario.setAcronimo(objLogAdm.obtieneAcronimoAplicacion());
-            //Registro el ultimo ingreso del usuario
-            confirma.registraUltimoIngreso(this.usuario.getIdTius());
-            //Obtenemos los parametros generales de la aplicación
-            Aut_ParametrosLogica logPar = new Aut_ParametrosLogica();
-            this.parametros = logPar.calculaFechas(parametros);
-            Map session = ActionContext.getContext().getSession();
-            session.put("usuario", this.usuario);
-            session.put("parametros", this.parametros);
-            String tpUsua = usuario.getTipoUsuario();
-            //Copia la imagen del logo al proyecto 
-            HttpServletRequest request = ServletActionContext.getRequest();
-            File logoServ = new File(request.getSession().getServletContext().getRealPath("/IMAGENES/logo.jpg"));
-            LogoLogica logLogo = new LogoLogica();
-            logLogo.guardaImagenServidor(logoServ);
-            if (tpUsua.equalsIgnoreCase("AD")) {
-                return ADMINISTRADOR;
+        try {
+            ConfirmaDatos confirma = new ConfirmaDatos();
+            //Confirma si el los datos que ingreso el usuario tienen acceso al sistema
+            RetornoLoginDto acceso = confirma.confimaUsuario(this.user, this.pass);
+            if (acceso.isAcceso()) {
+                //Recuperamos el objeto con todos los datos del usuario
+                RecuperaUsuario recuperaUsuario = new RecuperaUsuario();
+                this.usuario = recuperaUsuario.recuperaDatosUsuario(this.user);
+                this.usuario.setCambioContra(acceso.getUpdate());
+                this.usuario.setUsuario(this.user);
+                //Obtengo el acronimo de la aplicacion
+                try {
+                    AdministracionLogica objLogAdm = new AdministracionLogica();
+                    this.usuario.setAcronimo(objLogAdm.obtieneAcronimoAplicacion());
+
+                } catch (Error e) {
+                    e.printStackTrace();
+                }
+                //Registro el ultimo ingreso del usuario
+                confirma.registraUltimoIngreso(this.usuario.getIdTius());
+                //Obtenemos los parametros generales de la aplicación
+                Aut_ParametrosLogica logPar = new Aut_ParametrosLogica();
+                this.parametros = logPar.calculaFechas(parametros);
+                Map session = ActionContext.getContext().getSession();
+                session.put("usuario", this.usuario);
+                session.put("parametros", this.parametros);
+                String tpUsua = usuario.getTipoUsuario();
+                //Copia la imagen del logo al proyecto 
+                HttpServletRequest request = ServletActionContext.getRequest();
+                File logoServ = new File(request.getSession().getServletContext().getRealPath("/IMAGENES/logo.jpg"));
+                LogoLogica logLogo = new LogoLogica();
+                logLogo.guardaImagenServidor(logoServ);
+                if (tpUsua.equalsIgnoreCase("AD")) {
+                    return ADMINISTRADOR;
+                } else {
+                    return CAJERO;
+                }
             } else {
-                return CAJERO;
+                addActionError("Error de usuario o contraseña");
+                return ERROR;
             }
-        } else {
-            addActionError("Error de usuario o contraseña");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            addActionError("Error " + e);
             return ERROR;
         }
     }
