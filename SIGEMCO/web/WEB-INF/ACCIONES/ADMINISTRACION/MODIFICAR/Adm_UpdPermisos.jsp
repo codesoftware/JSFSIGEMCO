@@ -259,6 +259,12 @@
                                                         <td>Consulta Conteos</td>
                                                         <td><input type="checkbox" value="InPr12" id="InPr12" /></td>
                                                     </tr>
+                                                    <tr>
+                                                        <td>Adicion Prod.Conteo</td>
+                                                        <td><input type="checkbox" value="InPr13" id="InPr13" title="Adicionar Productos al conteo desde safc" /></td>
+                                                        <td>Actualizacion Codigo Barras Conteo</td>
+                                                        <td><input type="checkbox" value="InPr14" id="InPr14" title="Actualizar el codigo de barras desde conteo" /></td>
+                                                    </tr>
                                                 </tbody>
                                             </table>
                                         </div>
