@@ -60,7 +60,7 @@ order by dska_dska]]>
 	, COPR_DESC
 	, (select para_valor from em_tpara where para_clave = 'NOMBREEMPRESA') NOMBREEMPRESA
 	, (select para_valor from em_tpara where para_clave = 'NIT') NIT
-    ,dska_cod,dska_nom_prod, ecop_existencias, ecop_diferencia, ecop_valor,dska_dska
+    ,dska_cod,dska_nom_prod, ecop_existencias, ecop_diferencia, ecop_valor,dska_dska, dska_desc
 FROM IN_TCOPR, EM_TSEDE,in_tdska,in_tecop
 WHERE COPR_SEDE = SEDE_SEDE
 AND COPR_COPR = CAST($P{copr_copr} AS int)
@@ -77,7 +77,9 @@ order by dska_dska]]>
 	<field name="copr_fec_fin" class="java.lang.String">
 		<fieldDescription><![CDATA[Fecha en la cual se termino el inventario]]></fieldDescription>
 	</field>
-	<field name="sede_nombre" class="java.lang.String"/>
+	<field name="sede_nombre" class="java.lang.String">
+		<fieldDescription><![CDATA[Nombre de la sede (se vera reflejado en la factura)]]></fieldDescription>
+	</field>
 	<field name="copr_desc" class="java.lang.String">
 		<fieldDescription><![CDATA[Descripcion, comentario o razon por la cual se realiza el inventario]]></fieldDescription>
 	</field>
@@ -87,18 +89,19 @@ order by dska_dska]]>
 	<field name="dska_nom_prod" class="java.lang.String">
 		<fieldDescription><![CDATA[Nombre que identifica al producto]]></fieldDescription>
 	</field>
-	<field name="ecop_existencias" class="java.lang.Integer">
+	<field name="ecop_existencias" class="java.lang.Long">
 		<fieldDescription><![CDATA[Existencias del producto en la sede del inventario a la fecha de cierre del conteo]]></fieldDescription>
 	</field>
-	<field name="ecop_diferencia" class="java.lang.Integer">
+	<field name="ecop_diferencia" class="java.lang.Long">
 		<fieldDescription><![CDATA[Diferencia entre los valores del conteo y las existencias que deberian haber en la sede]]></fieldDescription>
 	</field>
-	<field name="ecop_valor" class="java.lang.Integer">
+	<field name="ecop_valor" class="java.lang.Long">
 		<fieldDescription><![CDATA[Numero de valores del producto]]></fieldDescription>
 	</field>
-	<field name="dska_dska" class="java.lang.Integer">
+	<field name="dska_dska" class="java.lang.Long">
 		<fieldDescription><![CDATA[Identificador primario de la tabla]]></fieldDescription>
 	</field>
+	<field name="dska_desc" class="java.lang.String"/>
 	<title>
 		<band height="90" splitType="Stretch">
 			<frame>
@@ -243,7 +246,7 @@ order by dska_dska]]>
 					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{dska_nom_prod}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{dska_desc}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="260" y="0" width="85" height="25" uuid="57fa24e2-fce3-475c-ab90-e1b202f59820"/>
