@@ -370,9 +370,13 @@
             var ubicacion = location;
             var host = location.hostname;
             var aplication = '/NSIGEMCO/index.jsf';
-            if (igualPuerto == 'NO') {
-                puerto = '<s:text name="nuevoSigemco.puerto"/>';
-            } else {
+            if (host == 'localhost') {
+                if (igualPuerto == 'NO') {
+                    puerto = '<s:text name="nuevoSigemco.puerto"/>';
+                } else {
+                    puerto = location.port;
+                }
+            }else{
                 puerto = location.port;
             }
             var ruta = "http://" + host + ":" + puerto + aplication;
