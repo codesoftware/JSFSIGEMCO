@@ -376,12 +376,24 @@
                 } else {
                     puerto = location.port;
                 }
-            }else{
+            } else {
                 puerto = location.port;
             }
-            var ruta = "http://" + host + ":" + puerto + aplication;
-            document.getElementById('redirectNewSigemco').action = ruta;
-            document.getElementById('redirectNewSigemco').submit();
+            $.ajax({
+                url: RutaSitio + "/AJAX/JSP/ajaxCerrarSesion.jsp",
+                dataType: 'json',
+                cache: false,
+                async: false,
+                success: function (data, textStatus, jqXHR) {
+                    if (data.respuesta == 'Ok') {
+                        var ruta = "http://" + host + ":" + puerto + aplication;
+                        document.getElementById('redirectNewSigemco').action = ruta;
+                        document.getElementById('redirectNewSigemco').submit();
+                    } else {
+                        alert('Imposible cerrar sesion para ir a nsigmeco por favor contacte al administrador');
+                    }
+                }
+            });
         }
     </script>
     <form method="POST" action="<s:text name="nuevoSigemco.url"/>" id="redirectNewSigemco" >
