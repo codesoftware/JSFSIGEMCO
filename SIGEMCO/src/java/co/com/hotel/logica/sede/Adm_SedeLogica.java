@@ -31,7 +31,7 @@ public class Adm_SedeLogica {
         String resultado = "OK";
         try {
             String sql = "INSERT INTO EM_TSEDE (SEDE_NOMBRE,SEDE_DIRECCION,SEDE_TELEFONO,SEDE_TIUS,SEDE_BODEGA) VALUES "
-                    + "('" + objTO.getSede_nombre() + "','" + objTO.getSede_direccion() + "','" + objTO.getSede_telefono() + "','" + UsuarioLogeado + "','"+objTO.getSede_bodega()+"')";
+                    + "('" + objTO.getSede_nombre() + "','" + objTO.getSede_direccion() + "','" + objTO.getSede_telefono() + "','" + UsuarioLogeado + "','" + objTO.getSede_bodega() + "')";
             boolean valida = function.enviarUpdate(sql);
             if (!valida) {
                 resultado = "Error";
@@ -68,23 +68,25 @@ public class Adm_SedeLogica {
         } else if (filtro.equalsIgnoreCase("-1")) {
             sql += "sede_estado)";
         }
-        EnvioFunction function = new EnvioFunction();
-        ResultSet rs = null;
-        rs = function.enviarSelect(sql);
-        function.cerrarConexion();
-        if (rs != null) {
-            resultado = new ArrayList<Sede>();
-            while (rs.next()) {
-                Sede auxSede = new Sede();
-                auxSede.setSede_estado(rs.getString("estado"));
-                auxSede.setSede_direccion(rs.getString("direccion"));
-                auxSede.setSede_nombre(rs.getString("nombre"));
-                auxSede.setSede_sede(rs.getString("id"));
-                auxSede.setSede_telefono(rs.getString("telefono"));
-                auxSede.setSede_fecin(rs.getString("fecha"));
-                auxSede.setSede_bodega(rs.getString("sede_bodega"));
-                resultado.add(auxSede);
+        try (EnvioFunction function = new EnvioFunction();) {
+            ResultSet rs = null;
+            rs = function.enviarSelect(sql);
+            if (rs != null) {
+                resultado = new ArrayList<Sede>();
+                while (rs.next()) {
+                    Sede auxSede = new Sede();
+                    auxSede.setSede_estado(rs.getString("estado"));
+                    auxSede.setSede_direccion(rs.getString("direccion"));
+                    auxSede.setSede_nombre(rs.getString("nombre"));
+                    auxSede.setSede_sede(rs.getString("id"));
+                    auxSede.setSede_telefono(rs.getString("telefono"));
+                    auxSede.setSede_fecin(rs.getString("fecha"));
+                    auxSede.setSede_bodega(rs.getString("sede_bodega"));
+                    resultado.add(auxSede);
+                }
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return resultado;
     }
