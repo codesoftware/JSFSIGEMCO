@@ -541,6 +541,12 @@
                                                         <td>Precio Editable</td>
                                                         <td><input type="checkbox" value="FcCr8" id="FcCr8"/></td>
                                                     </tr>
+                                                    <tr>
+                                                        <td>Promedio Ponderado</td>
+                                                        <td><input type="checkbox" value="FcCr9" id="FcCr9"/></td>
+                                                        <td>Existencias en Sedes</td>
+                                                        <td><input type="checkbox" value="FcCr10" id="FcCr10"/></td>
+                                                    </tr>
                                                 </tbody>
                                             </table>
                                         </div>
