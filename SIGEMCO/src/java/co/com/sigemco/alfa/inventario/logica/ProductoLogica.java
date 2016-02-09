@@ -321,7 +321,7 @@ public class ProductoLogica {
         try (EnvioFunction function = new EnvioFunction()) {
             function.adicionarNombre("IN_ADICIONA_PROD_EXIS");
             function.adicionarNumeric(producto.getDska_dska());
-            function.adicionarNumeric(movimiento.getNoProductos());
+            function.adicionarNumeric(movimiento.getNoProductos().replaceAll("\\.", ""));
             function.adicionarNumeric(movimiento.getCosto());
             function.adicionarNumeric(movimiento.getSede());
             function.adicionarNumeric(tius_tius);
