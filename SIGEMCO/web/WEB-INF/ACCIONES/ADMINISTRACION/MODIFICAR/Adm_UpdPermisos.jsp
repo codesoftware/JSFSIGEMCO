@@ -547,6 +547,12 @@
                                                         <td>Existencias en Sedes</td>
                                                         <td><input type="checkbox" value="FcCr10" id="FcCr10"/></td>
                                                     </tr>
+                                                    <tr>
+                                                        <td>Ver Caja</td>
+                                                        <td><input type="checkbox" value="FcCr11" id="FcCr11"/></td>
+                                                        <td>&nbsp;</td>
+                                                        <td>&nbsp;</td>
+                                                    </tr>
                                                 </tbody>
                                             </table>
                                         </div>
