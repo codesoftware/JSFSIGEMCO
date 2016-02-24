@@ -8,7 +8,8 @@
             <script type="text/javascript">
                 $(function () {
                     $('#insertarBtn').click(function () {
-                        document.forms[0].submit();
+                        //document.forms[0].submit();
+                        $('#formRecetas').submit();
                     });
                 });
             </script>
@@ -52,7 +53,7 @@
         <div class="row">
             <div class="col-md-3 col-xs-0 col-sm-0"></div>
             <div class="col-md-6 col-xs-12 col-sm-12">
-                <s:form theme="simple" method="post" action="Inv_InsertReceta">
+            <s:form theme="simple" method="post" action="Inv_InsertReceta" id="formRecetas">
                     <s:textfield name="accion" value="insertReceta" cssStyle="display:none" />
                     <table class="table table-bordered">
                         <thead>
