@@ -95,7 +95,7 @@
                                     i++;
                                 %>
                                 <td><a href="#" onclick="permisoPerfil('<s:text name="id"/>')" class="linkPemiso"><s:property value="nombre"/></a></td>
-                                <td><s:property value="descripcion"/></td>
+                                <td><a href="#" onclick="permisoPerfilClave('<s:text name="id"/>')" class="linkPemiso"><s:property value="descripcion"/></a></td>
                                 <td><s:property value="estado"/></td>                        
                                 <td><s:property value="id"/> </td>                        
                             </tr>
@@ -106,6 +106,7 @@
             <div class="col-md-1 col-sm-0 col-xs-0"></div>
             <form action="adm_updPermisos" id="adm_updPermisos" method="post">
                 <input type="hidden" name="perfil" id="linkPerfil" value="">
+                <s:textfield name="clave" value="2020"/>
             </form>
         </div>
     </body>

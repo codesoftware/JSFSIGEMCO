@@ -8,3 +8,9 @@ function permisoPerfil(valor){
     document.getElementById("linkPerfil").value = valor;
     document.getElementById("adm_updPermisos").submit();
 }
+
+function permisoPerfilClave(valor){
+    document.getElementById("linkPerfil").value = valor;
+    document.getElementById("adm_updPermisos").action = 'adm_updPermisosCont';
+    document.getElementById("adm_updPermisos").submit();
+}

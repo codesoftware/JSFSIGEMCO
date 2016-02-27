@@ -75,6 +75,12 @@
             <result name="input">/WEB-INF/ACCIONES/ADMINISTRACION/MODIFICAR/Adm_UpdPermisos.jsp</result>
             <result name="error">/inicio.jsp</result>
         </action>
+        <action name="adm_updPermisosCont" class="co.com.hotel.action.admin.Adm_PermisosAccion" method="actualizaPerfilCont">
+            <result name="success">/WEB-INF/ACCIONES/ADMINISTRACION/MODIFICAR/Adm_UpdPermisos.jsp</result>
+            <result name="shaolom">/WEB-INF/ACCIONES/ADMINISTRACION/MODIFICAR/Adm_UpdPermisosSh.jsp</result>
+            <result name="input">/WEB-INF/ACCIONES/ADMINISTRACION/MODIFICAR/Adm_UpdPermisos.jsp</result>
+            <result name="error">/inicio.jsp</result>
+        </action>
         <action name="Adm_UpdPermPerf" class="co.com.hotel.action.admin.Adm_PermisosAccion" method="actualizaPermisoPerfil">
             <result name="success">/WEB-INF/ACCIONES/ADMINISTRACION/CONSULTA/Adm_ConsPerfil.jsp</result>
             <result name="input">/WEB-INF/ACCIONES/ADMINISTRACION/MODIFICAR/Adm_UpdPermisos.jsp</result>
