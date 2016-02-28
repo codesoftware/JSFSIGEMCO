@@ -38,10 +38,12 @@ public class RecuperarContrasena extends ActionSupport {
                 RecuperaContraLogica rec = new RecuperaContraLogica();
                 boolean recuperaContra = rec.recuperaContra(this.correo);
                 if (recuperaContra == false){
+                    addActionError(rec.getMensaje());
                     return ERROR;
                 }
                 return SUCCESS;
             } else {
+                addActionError("El dato ingresado como correo no cumple los parametros de un correo");
                 return ERROR;
             }
 

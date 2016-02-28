@@ -9,6 +9,30 @@
     </head>
     <body>
         <s:form action="recupera" autocomplete="off" theme="simple">
+            <div class="row">
+                <div class="col-sm-1 col-md-4"></div>
+                <div class="col-sm-1 col-md-4">
+                <br/>
+                <div class="Mensajes" style="display: none;">
+                    <s:if test="hasActionErrors()">
+                        <div class="alert alert-danger" id="info" role="alert" ><h4><s:actionerror /></h4></div>
+                        <script>
+                            mostrarMsn();
+                        </script>
+                    </s:if>
+                </div>
+                <div class="MensajesOk" style="display: none;">
+                    <s:if test="hasActionMessages()">
+                        <div class="alert alert-success" id="info" role="alert" ><h4><s:actionmessage/></h4></div>
+                        <script>
+                            mostrarMsnOk();
+                        </script>
+                    </s:if>
+                </div>
+                <br/>
+                </div>
+                <div class="col-sm-1 col-md-4"></div>
+            </div>
             <div class="row " >
                 <div class="col-sm-1 col-md-4"></div>
                 <div class="col-sm-10 col-md-4 thumbnail">

@@ -73,11 +73,11 @@
                             </tr>
                             <tr>
                                 <td>Teléfono fijo:</td>
-                                <td><s:textfield name="proved.prov_telefono" cssClass="form-control"/></td>
+                                <td><s:textfield name="proved.prov_telefono" cssClass="form-control" /></td>
                             </tr>
                             <tr>
                                 <td>Dirección:</td>
-                                <td><s:textfield name="proved.prov_direccion" cssClass="form-control"/></td>
+                                <td><s:textfield name="proved.prov_direccion" cssClass="form-control" maxLength="20"/></td>
                             </tr>
                             <tr>
                                 <td>Teléfono Celular:</td>

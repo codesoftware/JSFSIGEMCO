@@ -9,8 +9,6 @@ import co.com.hotel.dto.Empresa;
 import co.com.hotel.logica.empresa.Emp_EmpresaLogica;
 import java.util.Properties;
 import java.util.ResourceBundle;
-import javax.activation.DataHandler;
-import javax.activation.FileDataSource;
 import javax.mail.BodyPart;
 import javax.mail.Message;
 import javax.mail.Session;

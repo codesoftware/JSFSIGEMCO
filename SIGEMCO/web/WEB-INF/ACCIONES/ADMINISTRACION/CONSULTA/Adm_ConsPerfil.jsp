@@ -94,7 +94,7 @@
                                     }
                                     i++;
                                 %>
-                                <td><a href="#" onclick="permisoPerfil('<s:text name="id"/>')" class="linkPemiso"><s:property value="nombre"/></a></td>
+                                <td><!--<a href="#" onclick="permisoPerfil('<s:text name="id"/>')" class="linkPemiso">--><s:property value="nombre"/><!--</a>--></td>
                                 <td><a href="#" onclick="permisoPerfilClave('<s:text name="id"/>')" class="linkPemiso"><s:property value="descripcion"/></a></td>
                                 <td><s:property value="estado"/></td>                        
                                 <td><s:property value="id"/> </td>                        
@@ -104,10 +104,27 @@
                 </s:if>                
             </div>
             <div class="col-md-1 col-sm-0 col-xs-0"></div>
-            <form action="adm_updPermisos" id="adm_updPermisos" method="post">
+            <form action="adm_updPermisos" id="adm_updPermisos" method="post" style="display: none;">
                 <input type="hidden" name="perfil" id="linkPerfil" value="">
-                <s:textfield name="clave" value="2020"/>
+                <s:textfield name="clave" id="claveUsuario"/>
             </form>
+        </div>
+        <div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" id="mensaje">
+            <div class="modal-dialog">                
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">INFORMACION</h4>
+                    </div>
+                    <div class="modal-body">
+                        <span id="textoMsn"></span>
+                    </div>
+                    <div class="modal-footer">                        
+                        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="clickAceptar()" id="btnAceptar">
+                            ACEPTAR
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
     </body>
 </html>

@@ -6,7 +6,6 @@
 package co.com.hotel.logica.general;
 
 import co.com.hotel.email.EnviarCorreoIns;
-import co.com.hotel.action.general.*;
 import co.com.hotel.persistencia.general.EnvioFunction;
 import co.com.sigemco.alfa.email.SendMail;
 
@@ -20,6 +19,7 @@ import co.com.sigemco.alfa.email.SendMail;
 public class RecuperaContraLogica {
 
     private String usuario;
+    private String mensaje;
 
     /**
      * Función la cual genera la clave y envia el correo con los datos del
@@ -48,7 +48,7 @@ public class RecuperaContraLogica {
                         + "\n\n USUARIO: " + this.usuario
                         + "\n\n CONTRASEÑA: " + stringContra
                         + "\n\n Si esta solicitud no fue realizada por usted por favor omita este mensaje";
-                String asunto="Cambio contraseña";
+                String asunto = "Cambio contraseña";
 
                 SendMail sm = new SendMail(msg, correo, asunto);
 
@@ -56,7 +56,7 @@ public class RecuperaContraLogica {
                 //confirma = true; corregir
                 if (confirma) {
                     sm.send();
-                   // enviar.envioCorreoIns(correo);
+                    // enviar.envioCorreoIns(correo);
                 } else {
                     return false;
                 }
@@ -93,11 +93,16 @@ public class RecuperaContraLogica {
             int tam = rtaVector.length;
             if (tam == 2) {
                 if (rtaVector[1].equalsIgnoreCase("Ok")) {
-                    if (!function.getRespuesta().isEmpty() || function.getRespuesta() != null) {
-                        this.usuario = function.getRespuesta();
-                        return true;
+                    if (function.getRespuesta() != null) {
+                        if (!function.getRespuesta().isEmpty() || function.getRespuesta() != null) {
+                            this.usuario = function.getRespuesta();
+                            return true;
+                        }
+                        return false;
+                    } else {
+                        this.mensaje = "El correo ingresado no se encuentra en la base de datos, por favor verique su correo";
+                        return false;
                     }
-                    return false;
                 } else {
                     return false;
                 }
@@ -140,7 +145,7 @@ public class RecuperaContraLogica {
             //Esta es la respuesta que retorna postgres
             String rtaFunc = function.getRespuesta();
             if (rtaFunc.equalsIgnoreCase("OK")) {
-                System.out.println("El usuario actualizo correctamente su contraseña");
+                //System.out.println("El usuario actualizo correctamente su contraseña");
                 return true;
             } else {
                 return false;
@@ -150,4 +155,13 @@ public class RecuperaContraLogica {
             return false;
         }
     }
+
+    public String getMensaje() {
+        return mensaje;
+    }
+
+    public void setMensaje(String mensaje) {
+        this.mensaje = mensaje;
+    }
+
 }
