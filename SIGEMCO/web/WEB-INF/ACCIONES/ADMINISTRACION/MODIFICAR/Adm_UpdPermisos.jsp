@@ -550,8 +550,8 @@
                                                     <tr>
                                                         <td>Ver Caja</td>
                                                         <td><input type="checkbox" value="FcCr11" id="FcCr11"/></td>
-                                                        <td>&nbsp;</td>
-                                                        <td>&nbsp;</td>
+                                                        <td>Cotización</td>
+                                                        <td><input type="checkbox" value="FcCr12" id="FcCr12"/></td>
                                                     </tr>
                                                 </tbody>
                                             </table>

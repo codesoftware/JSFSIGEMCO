@@ -28,8 +28,8 @@ public class ProveedorDao {
      */
     public String insertaProveedor() {
         String select = "";
-        select = "INSERT into in_tprov (prov_nombre,  prov_nit,prov_razon_social,prov_representante,prov_telefono,prov_direccion,prov_celular)"
-                .concat("values ('" + this.prov_nombre + "','" + this.prov_nit + "','" + this.prov_razon_social + "','" + this.prov_representante + "','" + this.prov_telefono + "','" + this.prov_direccion + "','" + this.prov_celular + "')");
+        select = "INSERT into in_tprov (prov_nombre,  prov_nit,prov_razon_social,prov_representante,prov_telefono,prov_direccion,prov_celular, prov_retde)"
+                .concat("values ('" + this.prov_nombre + "','" + this.prov_nit + "','" + this.prov_razon_social + "','" + this.prov_representante + "','" + this.prov_telefono + "','" + this.prov_direccion + "','" + this.prov_celular + "',1)");
         return select;
     }
 

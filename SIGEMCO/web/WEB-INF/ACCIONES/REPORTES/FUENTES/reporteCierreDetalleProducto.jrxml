@@ -5,7 +5,7 @@
 	<property name="ireport.y" value="0"/>
 	<parameter name="CIERRE" class="java.lang.String"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String">
-		<defaultValueExpression><![CDATA["/opt/Servidores/apache-tomcat-8.0.23/webapps/SIGEMCO/WEB-INF/ACCIONES/REPORTES/FUENTES/"]]></defaultValueExpression>
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<parameter name="FECHA_CIER" class="java.lang.String"/>
 	<queryString>

@@ -67,7 +67,7 @@
                                     </div>
                                 </td>
                             </tr>
-                            <tr>
+                            <!--tr>
                                 <td>Dias Vencimiento:</td>
                                 <td><s:textfield id="diasVen" name="empresa.diasVen" cssClass="form-control" data-toggle="tooltip" data-placement="bottom" title="Número de días Previos a vencimiento de entrega del equipo"  onkeypress="soloNumeros();"/></td>
                             </tr>
@@ -98,7 +98,7 @@
                                     </div>
                                 </td>                                
                             </tr>
-                            <tr>
+                            <tr-->
                                 <td>Subcuenta Pagos Con Tarjeta:</td>
                                 <td>
                                     <s:textfield id="comision" name="empresa.subcuentaBancos" cssClass="form-control" data-toggle="tooltip" data-placement="bottom" title="SubCuenta a la cual se dirigiran los pagos con tarjeta de credito"  onkeypress="soloNumeros();" maxLength="6"/>

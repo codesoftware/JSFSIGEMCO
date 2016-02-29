@@ -54,6 +54,14 @@ public class Emp_EmpresaLogica {
             if (!inserts.equalsIgnoreCase("Ok")) {
                 return inserts;
             }
+            inserts = this.ingresaActEconomica(empresa.getActEco());
+            if (!inserts.equalsIgnoreCase("Ok")) {
+                return inserts;
+            }
+            inserts = this.ingresaActCorreoFactura(empresa.getCorreo());
+            if (!inserts.equalsIgnoreCase("Ok")) {
+                return inserts;
+            }
             rta = "Ok";
         } catch (Exception e) {
             System.out.println("Error Emp_EmpresaLogica.ingresarParametrosPrincempresa " + e);
@@ -510,7 +518,9 @@ public class Emp_EmpresaLogica {
             sql += "       (SELECT para_valor FROM em_tpara where UPPER(para_clave) = 'COMISIONPOST') COMISIONPOST , ";
             sql += "       (SELECT para_valor FROM em_tpara where UPPER(para_clave) = 'SBCUTARJETA') SBCUTARJETA, ";
             sql += "       (SELECT para_valor FROM em_tpara where UPPER(para_clave) = 'IVAPRVENTA') IVAPRVENTA, ";
-            sql += "       (SELECT para_valor FROM em_tpara where UPPER(para_clave) = 'DEPEMPRESA') DEPEMPRESA ";
+            sql += "       (SELECT para_valor FROM em_tpara where UPPER(para_clave) = 'DEPEMPRESA') DEPEMPRESA, ";
+            sql += "       (SELECT para_valor FROM em_tpara where UPPER(para_clave) = 'ACTECONO') ACTECONO, ";
+            sql += "       (SELECT para_valor FROM em_tpara where UPPER(para_clave) = 'CORREOFACT') CORREOFACT ";
             rs = function.enviarSelect(sql);
             while (rs.next()) {
                 if (contador == 0) {
@@ -531,6 +541,8 @@ public class Emp_EmpresaLogica {
                 obj.setIvaVentas(rs.getString("IVAPRVENTA"));
                 obj.setResolucion(rs.getString("RESOLUCION"));
                 obj.setDepartamento(rs.getString("DEPEMPRESA"));
+                obj.setActEco(rs.getString("ACTECONO"));
+                obj.setCorreo(rs.getString("CORREOFACT"));
             }
         } catch (Exception e) {
             System.out.println("Error Emp_EmpresaLogica.obtieneDatosEmpresa " + e);
@@ -722,6 +734,74 @@ public class Emp_EmpresaLogica {
             function.enviarUpdate(sql);
         } catch (Exception e) {
             System.err.println("Error Emp_EmpresaLogica.ingresaDepartamentoEmpresa");
+            e.printStackTrace();
+            return "Error al insertar el nombre de la empresa: " + e;
+        } finally {
+            function.cerrarConexion();
+        }
+        return "Ok";
+    }
+    
+    private String ingresaActEconomica(String actEcono) {
+        EnvioFunction function = new EnvioFunction();
+        ResultSet rs = null;
+        String select = "";
+        String sql = "";
+        int cont = 0;
+        try {
+            select += "select COUNT(*)  contador                \n";
+            select += "from em_tpara                            \n";
+            select += "where upper(para_clave) = 'ACTECONO'    \n";
+            rs = function.enviarSelect(select);
+            while (rs.next()) {
+                cont = rs.getInt("contador");
+            }
+            if (cont == 0) {
+                sql = "insert into em_tpara(para_clave, para_valor) \n";
+                sql += "values('ACTECONO', '" + actEcono + "')   \n";
+
+            } else {
+                sql = "UPDATE em_tpara                          \n";
+                sql += "SET para_valor = '" + actEcono + "'         \n";
+                sql += "WHERE upper(para_clave) = 'ACTECONO'\n";
+            }
+            function.enviarUpdate(sql);
+        } catch (Exception e) {
+            System.err.println("Error Emp_EmpresaLogica.ingresaActEconomica");
+            e.printStackTrace();
+            return "Error al insertar el nombre de la empresa: " + e;
+        } finally {
+            function.cerrarConexion();
+        }
+        return "Ok";
+    }
+    
+    private String ingresaActCorreoFactura(String correo) {
+        EnvioFunction function = new EnvioFunction();
+        ResultSet rs = null;
+        String select = "";
+        String sql = "";
+        int cont = 0;
+        try {
+            select += "select COUNT(*)  contador                \n";
+            select += "from em_tpara                            \n";
+            select += "where upper(para_clave) = 'CORREOFACT'    \n";
+            rs = function.enviarSelect(select);
+            while (rs.next()) {
+                cont = rs.getInt("contador");
+            }
+            if (cont == 0) {
+                sql = "insert into em_tpara(para_clave, para_valor) \n";
+                sql += "values('CORREOFACT', '" + correo + "')   \n";
+
+            } else {
+                sql = "UPDATE em_tpara                          \n";
+                sql += "SET para_valor = '" + correo + "'         \n";
+                sql += "WHERE upper(para_clave) = 'CORREOFACT'\n";
+            }
+            function.enviarUpdate(sql);
+        } catch (Exception e) {
+            System.err.println("Error Emp_EmpresaLogica.ingresaActCorreoFactura");
             e.printStackTrace();
             return "Error al insertar el nombre de la empresa: " + e;
         } finally {

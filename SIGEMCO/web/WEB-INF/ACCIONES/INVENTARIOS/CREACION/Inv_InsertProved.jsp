@@ -57,31 +57,31 @@
                         <tbody>
                             <tr>
                                 <td>Nombre:</td>
-                                <td><s:textfield name="proved.prov_nombre" cssClass="form-control"/></td>
+                                <td><s:textfield name="proved.prov_nombre" cssClass="form-control" maxlength="50"/></td>
                             </tr>
                             <tr>
                                 <td>Nit:</td>
-                                <td><s:textfield name="proved.prov_nit" cssClass="form-control"/></td>
+                                <td><s:textfield name="proved.prov_nit" cssClass="form-control" maxLength="30"/></td>
                             </tr>
                             <tr>
                                 <td>Razón Social:</td>
-                                <td><s:textfield name="proved.prov_razon_social" cssClass="form-control"/></td>
+                                <td><s:textfield name="proved.prov_razon_social" cssClass="form-control" maxLength="50"/></td>
                             </tr>
                             <tr>
                                 <td>Representante:</td>
-                                <td><s:textfield name="proved.prov_representante" cssClass="form-control"/></td>
+                                <td><s:textfield name="proved.prov_representante" cssClass="form-control" maxLength="50"/></td>
                             </tr>
                             <tr>
                                 <td>Teléfono fijo:</td>
-                                <td><s:textfield name="proved.prov_telefono" cssClass="form-control" /></td>
+                                <td><s:textfield name="proved.prov_telefono" cssClass="form-control" onkeypress="return validaNumeros(event)"/></td>
                             </tr>
                             <tr>
                                 <td>Dirección:</td>
-                                <td><s:textfield name="proved.prov_direccion" cssClass="form-control" maxLength="20"/></td>
+                                <td><s:textfield name="proved.prov_direccion" cssClass="form-control" maxLength="20" maxlength="50"/></td>
                             </tr>
                             <tr>
                                 <td>Teléfono Celular:</td>
-                                <td><s:textfield name="proved.prov_celular" cssClass="form-control"/></td>
+                                <td><s:textfield name="proved.prov_celular" cssClass="form-control" onkeypress="return validaNumeros(event)"/></td>
                             </tr>
                         </tbody>
                         <tfoot>

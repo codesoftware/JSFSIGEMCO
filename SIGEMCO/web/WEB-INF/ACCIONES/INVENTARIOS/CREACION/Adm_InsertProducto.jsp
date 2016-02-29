@@ -132,7 +132,7 @@
                                     </tr>
                                     <tr>
                                         <td>Costo:</td>
-                                        <td><s:textfield name="producto.costo" requiered="true" title="Este es el costo unitario de cada producto que va ha ingresar" cssClass="form-control" id="producto_costo" onblur="cambioVlr(this.value)" onkeypress="return validaNumeros(event)" onkeyup="mascaraMoneda(this)" maxLength="6"/></td>
+                                        <td><s:textfield name="producto.costo" requiered="true" title="Este es el costo unitario de cada producto que va ha ingresar" cssClass="form-control" id="producto_costo" onblur="cambioVlr(this.value)" onkeypress="return validaNumeros(event)" onkeyup="mascaraMoneda(this)" maxLength="12"/></td>
                                     </tr>
                                     <tr>
                                         <td>Gravamen:</td>

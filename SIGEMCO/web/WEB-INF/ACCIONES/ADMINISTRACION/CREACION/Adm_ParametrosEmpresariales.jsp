@@ -62,23 +62,23 @@
                         <tbody>
                             <tr>
                                 <td >Nombre: </td>
-                                <td ><s:textfield cssClass="form-control" name="empresa.nombre"/></td>
+                                <td ><s:textfield cssClass="form-control" name="empresa.nombre" maxLength="50"/></td>
                             </tr>
                             <tr>
                                 <td>Nit:</td>
-                                <td><s:textfield cssClass="form-control" name="empresa.nit" /></td>
+                                <td><s:textfield cssClass="form-control" name="empresa.nit" maxlength="50"/></td>
                             </tr>
                             <tr>
                                 <td>Resolución Factura No: </td>
-                                <td><s:textfield cssClass="form-control" name="empresa.resolucion" /></td>
+                                <td><s:textfield cssClass="form-control" name="empresa.resolucion" maxLength="50"/></td>
                             </tr>
                             <tr>
                                 <td>Direcci&oacute;n: </td>
-                                <td><s:textfield cssClass="form-control" name="empresa.direccion" /></td>
+                                <td><s:textfield cssClass="form-control" name="empresa.direccion" maxLength="60"/></td>
                             </tr>
                             <tr>
                                 <td>Telefono: </td>
-                                <td><s:textfield cssClass="form-control" name="empresa.telefono" /></td>
+                                <td><s:textfield cssClass="form-control" name="empresa.telefono" maxLength="60" onkeypress="return validaNumeros(event)" /></td>
                             </tr>
                             <tr>
                                 <td>Departamento:</td>
@@ -92,6 +92,20 @@
                                     <select id="selectCiudad" name="empresa.ciudad" class="form-control" >
                                         <option value="-1">SELECCIONE UNA DEPARTAMENTO</option>
                                     </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Actividad Economica:
+                                </td>
+                                <td>
+                                <s:textfield name="empresa.actEco" cssClass="form-control" maxLength="20"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Correo Electronico:</td>
+                                <td>
+                                    <s:textfield name="empresa.correo" cssClass="form-control" maxLength="40"/>    
                                 </td>
                             </tr>
                         </tbody>

@@ -25,6 +25,8 @@ public class Empresa {
     private String subcuentaBancos;
     private String resolucion;
     private String departamento;
+    private String actEco;
+    private String correo;
 
     public String getResolucion() {
         return resolucion;
@@ -138,4 +140,19 @@ public class Empresa {
         this.departamento = departamento;
     }
 
+    public String getActEco() {
+        return actEco;
+    }
+
+    public void setActEco(String actEco) {
+        this.actEco = actEco;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
 }

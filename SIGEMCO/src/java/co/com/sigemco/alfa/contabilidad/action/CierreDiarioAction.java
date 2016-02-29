@@ -173,11 +173,13 @@ public class CierreDiarioAction extends ActionSupport implements UsuarioHabilita
     public String generarReporteExcel() {
         HttpServletRequest request = ServletActionContext.getRequest();
         File reporte = new File(request.getSession().getServletContext().getRealPath("/WEB-INF/ACCIONES/REPORTES/FUENTES/" + nombreJasper));
+        File base = new File(request.getSession().getServletContext().getRealPath("/WEB-INF/ACCIONES/REPORTES/FUENTES/" ));
         File reporteDestino = new File(request.getSession().getServletContext().getRealPath("/IMAGENES/REPORTES/reporteCierreDiario.xls"));
         try {
             String path = reporte.getPath();
+            String RutaBase = base.getPath()+"/";
             CierreDiarioLogica logica = new CierreDiarioLogica();
-            String rta = logica.generarReporteCierreExcel(cierreDiario, path, reporteDestino.getPath());
+            String rta = logica.generarReporteCierreExcel(cierreDiario, path, reporteDestino.getPath(), RutaBase);
             if (rta.equalsIgnoreCase("Ok")) {
                 fileInputStream = new FileInputStream(reporteDestino);
                 this.contentLength = reporteDestino.length();
@@ -202,10 +204,12 @@ public class CierreDiarioAction extends ActionSupport implements UsuarioHabilita
         HttpServletRequest request = ServletActionContext.getRequest();
         File reporte = new File(request.getSession().getServletContext().getRealPath("/WEB-INF/ACCIONES/REPORTES/FUENTES/" + nombreJasper));
         File reporteDestino = new File(request.getSession().getServletContext().getRealPath("/IMAGENES/REPORTES/reporteCierreDetalleProducto.xls"));
+        File base = new File(request.getSession().getServletContext().getRealPath("/WEB-INF/ACCIONES/REPORTES/FUENTES/"));
         try {
             String path = reporte.getPath();
+            String rutabase = base.getPath()+"/";
             CierreDiarioLogica logica = new CierreDiarioLogica();
-            String rta = logica.generarReporteCierreDetalladoExcel(cierreDiario, path, reporteDestino.getPath());
+            String rta = logica.generarReporteCierreDetalladoExcel(cierreDiario, path, reporteDestino.getPath(),rutabase);
             if (rta.equalsIgnoreCase("Ok")) {
                 fileInputStream = new FileInputStream(reporteDestino);
                 this.contentLength = reporteDestino.length();

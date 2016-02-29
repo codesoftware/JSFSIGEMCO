@@ -111,9 +111,10 @@ public class CierreDiarioLogica {
      * @param cierr
      * @param ruta
      * @param rutaDestino
+     * @param rutaBase
      * @return
      */
-    public String generarReporteCierreExcel(CierreDiarioDao cierr, String ruta, String rutaDestino) {
+    public String generarReporteCierreExcel(CierreDiarioDao cierr, String ruta, String rutaDestino, String rutaBase) {
         String rta = "Ok";
         Connection conn = null;
         try {
@@ -123,6 +124,7 @@ public class CierreDiarioLogica {
             Map<String, Object> properties = new HashMap<String, Object>();
             properties.put("FECHA", cierr.getCier_fech());
             properties.put("SEDE", cierr.getCier_sede());
+            properties.put("SUBREPORT_DIR", rutaBase);
             JasperReport jasperReport = (JasperReport) JRLoader.loadObject(ubicacionReporte);
             print = JasperFillManager.fillReportToFile(ubicacionReporte,
                     properties, conn);
@@ -152,9 +154,10 @@ public class CierreDiarioLogica {
      * @param cierr
      * @param ruta
      * @param rutaDestino
+     * @param rutaBase
      * @return
      */
-    public String generarReporteCierreDetalladoExcel(CierreDiarioDao cierr, String ruta, String rutaDestino) {
+    public String generarReporteCierreDetalladoExcel(CierreDiarioDao cierr, String ruta, String rutaDestino, String rutaBase) {
         String rta = "Ok";
         Connection conn = null;
         try {
@@ -164,6 +167,7 @@ public class CierreDiarioLogica {
             Map<String, Object> properties = new HashMap<String, Object>();
             int cierreId = obtieneCodigoCierre(cierr);
             properties.put("CIERRE", "" + cierreId);
+            properties.put("SUBREPORT_DIR", "" + rutaBase);
             properties.put("FECHA_CIER", "" + cierr.getCier_fech());
             JasperReport jasperReport = (JasperReport) JRLoader.loadObject(ubicacionReporte);
             try {
