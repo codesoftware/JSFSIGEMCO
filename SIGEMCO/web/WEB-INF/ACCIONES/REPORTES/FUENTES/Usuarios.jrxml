@@ -84,7 +84,7 @@ AND TIUS_ESTADO = case when UPPER($P{ESTADO_DS}) = '-1' THEN TIUS_ESTADO ELSE UP
 	<detail>
 		<band height="125" splitType="Stretch">
 			<componentElement>
-				<reportElement key="table 1" style="table 1" x="0" y="0" width="555" height="50" uuid="06e9fdf6-acef-4946-bee0-35d6464b23c2"/>
+				<reportElement key="table 1" style="table 1" x="0" y="0" width="555" height="40" uuid="06e9fdf6-acef-4946-bee0-35d6464b23c2"/>
 				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
 					<datasetRun subDataset="usuarios" uuid="2d447ead-873b-406a-9f22-0d164c6fa099">
 						<datasetParameter name="PEFIL_DS">
@@ -95,10 +95,10 @@ AND TIUS_ESTADO = case when UPPER($P{ESTADO_DS}) = '-1' THEN TIUS_ESTADO ELSE UP
 						</datasetParameter>
 						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 					</datasetRun>
-					<jr:column width="90" uuid="17bed61c-ad02-43a6-9e21-eba8d44ee969">
+					<jr:column width="80" uuid="17bed61c-ad02-43a6-9e21-eba8d44ee969">
 						<jr:columnHeader style="table 1_CH" height="30" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="90" height="30" uuid="e2bbe787-1db3-4812-8bea-6dad1a9a9175"/>
+								<reportElement x="0" y="0" width="80" height="30" uuid="e2bbe787-1db3-4812-8bea-6dad1a9a9175"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="10" isBold="true"/>
 								</textElement>
@@ -107,34 +107,18 @@ AND TIUS_ESTADO = case when UPPER($P{ESTADO_DS}) = '-1' THEN TIUS_ESTADO ELSE UP
 						</jr:columnHeader>
 						<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
 							<textField>
-								<reportElement x="0" y="0" width="90" height="20" uuid="c2ab26e8-d162-4d45-8d88-39c35fc6dbb1"/>
-								<textElement verticalAlignment="Middle"/>
+								<reportElement x="0" y="0" width="80" height="20" uuid="c2ab26e8-d162-4d45-8d88-39c35fc6dbb1"/>
+								<textElement verticalAlignment="Middle">
+									<font size="8"/>
+								</textElement>
 								<textFieldExpression><![CDATA[$F{fec_ingreso}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="90" uuid="1219ded7-13f2-4c16-97e2-0fa25250a1e3">
+					<jr:column width="71" uuid="b9d69f89-9f0c-456b-a302-7cf343f63d97">
 						<jr:columnHeader style="table 1_CH" height="30" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="90" height="30" uuid="ec59ea0b-c324-4266-ad0c-b0993c228410"/>
-								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font isBold="true"/>
-								</textElement>
-								<text><![CDATA[ULTIMO INGRESO]]></text>
-							</staticText>
-						</jr:columnHeader>
-						<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
-							<textField>
-								<reportElement x="0" y="0" width="90" height="20" uuid="73467717-076f-4674-80b0-61d143138dcd"/>
-								<textElement verticalAlignment="Middle"/>
-								<textFieldExpression><![CDATA[$F{fec_ultimoing}]]></textFieldExpression>
-							</textField>
-						</jr:detailCell>
-					</jr:column>
-					<jr:column width="90" uuid="b9d69f89-9f0c-456b-a302-7cf343f63d97">
-						<jr:columnHeader style="table 1_CH" height="30" rowSpan="1">
-							<staticText>
-								<reportElement x="0" y="0" width="90" height="30" uuid="d6f87cfe-f2e0-465a-a283-50cdbe07f076"/>
+								<reportElement x="0" y="0" width="71" height="30" uuid="d6f87cfe-f2e0-465a-a283-50cdbe07f076"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font isBold="true"/>
 								</textElement>
@@ -143,8 +127,10 @@ AND TIUS_ESTADO = case when UPPER($P{ESTADO_DS}) = '-1' THEN TIUS_ESTADO ELSE UP
 						</jr:columnHeader>
 						<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
 							<textField>
-								<reportElement x="0" y="0" width="90" height="20" uuid="b5905260-cd82-4cbd-92df-b9a012c73f24"/>
-								<textElement verticalAlignment="Middle"/>
+								<reportElement x="0" y="0" width="71" height="20" uuid="b5905260-cd82-4cbd-92df-b9a012c73f24"/>
+								<textElement verticalAlignment="Middle">
+									<font size="8"/>
+								</textElement>
 								<textFieldExpression><![CDATA[$F{estado}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
@@ -162,15 +148,17 @@ AND TIUS_ESTADO = case when UPPER($P{ESTADO_DS}) = '-1' THEN TIUS_ESTADO ELSE UP
 						<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
 							<textField>
 								<reportElement x="0" y="0" width="90" height="20" uuid="4f74edb4-9e4b-46db-a9d9-c9280123be03"/>
-								<textElement verticalAlignment="Middle"/>
+								<textElement verticalAlignment="Middle">
+									<font size="8"/>
+								</textElement>
 								<textFieldExpression><![CDATA[$F{cedula}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="90" uuid="b0e01dca-2d1d-4d48-aa51-16843c0bcffb">
+					<jr:column width="120" uuid="b0e01dca-2d1d-4d48-aa51-16843c0bcffb">
 						<jr:columnHeader style="table 1_CH" height="30" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="90" height="30" uuid="7aa6f305-a727-4d60-86ea-c8cc6ed39acb"/>
+								<reportElement x="0" y="0" width="120" height="30" uuid="7aa6f305-a727-4d60-86ea-c8cc6ed39acb"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font isBold="true"/>
 								</textElement>
@@ -179,16 +167,18 @@ AND TIUS_ESTADO = case when UPPER($P{ESTADO_DS}) = '-1' THEN TIUS_ESTADO ELSE UP
 						</jr:columnHeader>
 						<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
 							<textField>
-								<reportElement x="0" y="0" width="90" height="20" uuid="322f2f8c-98d0-4443-a052-4f0e1a7de4b1"/>
-								<textElement verticalAlignment="Middle"/>
+								<reportElement x="0" y="0" width="120" height="20" uuid="322f2f8c-98d0-4443-a052-4f0e1a7de4b1"/>
+								<textElement verticalAlignment="Middle">
+									<font size="8"/>
+								</textElement>
 								<textFieldExpression><![CDATA[$F{email}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="90" uuid="8119d2a6-e97e-4c47-a9ae-d24650c9df2d">
+					<jr:column width="160" uuid="8119d2a6-e97e-4c47-a9ae-d24650c9df2d">
 						<jr:columnHeader style="table 1_CH" height="30" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="90" height="30" uuid="63d30ee3-2e6a-4143-94ed-4bef2b4d614c"/>
+								<reportElement x="0" y="0" width="160" height="30" uuid="63d30ee3-2e6a-4143-94ed-4bef2b4d614c"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font isBold="true"/>
 								</textElement>
@@ -197,8 +187,10 @@ AND TIUS_ESTADO = case when UPPER($P{ESTADO_DS}) = '-1' THEN TIUS_ESTADO ELSE UP
 						</jr:columnHeader>
 						<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
 							<textField>
-								<reportElement x="0" y="0" width="90" height="20" uuid="5f1e8712-4190-4a9e-9536-8ce10b427199"/>
-								<textElement verticalAlignment="Middle"/>
+								<reportElement x="0" y="0" width="160" height="20" uuid="5f1e8712-4190-4a9e-9536-8ce10b427199"/>
+								<textElement verticalAlignment="Middle">
+									<font size="8"/>
+								</textElement>
 								<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>

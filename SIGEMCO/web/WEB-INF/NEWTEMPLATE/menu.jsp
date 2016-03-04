@@ -263,7 +263,9 @@
             <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;Facturación</a>
                 <ul class="dropdown-menu">
                     <%if (permisos.indexOf(".FcCr1.") >= 0) {%>
-                    <li><a href="reenvioGeneral.action?accion=311">Crear </a></li>
+                    <li><!--<a href="reenvioGeneral.action?accion=311">Crear </a>-->
+                        <a href="/SAFC/">Crear</a>
+                    </li>
                         <%}
                             if (permisos.indexOf(".FcCr3.") >= 0) {%>
                     <li style="display: none"><a href="reenvioGeneral.action?accion=312">Adición Serv. Y Productos Fac. Existente</a></li>
