@@ -181,16 +181,10 @@
                                                 </thead>
                                                 <tbody style="display: none;" class="subPermisoAdmSedes">
                                                     <tr>
-                                                        <td style="width: 30%">Insertar</td>
-                                                        <td style="width: 20%"><input type="checkbox" value="AdSe1" id="AdSe1"></td>
                                                         <td style="width: 30%">Actualización</td>
                                                         <td style="width: 20%"><input type="checkbox" value="AdSe2" id="AdSe2"></td>
-                                                    </tr>
-                                                    <tr>
                                                         <td style="width: 30%">Consulta General</td>
                                                         <td style="width: 20%"><input type="checkbox" value="AdSe3" id="AdSe3"></td>
-                                                        <td style="width: 30%">Eliminación</td>
-                                                        <td style="width: 20%"><input type="checkbox" value="AdSe4" id="AdSe4"></td>
                                                     </tr>
                                                 </tbody>
                                             </table>

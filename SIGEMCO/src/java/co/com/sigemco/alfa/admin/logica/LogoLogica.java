@@ -6,6 +6,8 @@
 package co.com.sigemco.alfa.admin.logica;
 
 import java.io.File;
+import javax.naming.Context;
+import javax.naming.InitialContext;
 import org.apache.commons.io.FileUtils;
 
 /**
@@ -17,7 +19,24 @@ public class LogoLogica {
     private String rutaBase;
 
     public LogoLogica() {
-        this.rutaBase = "/imagenes/";
+        //this.rutaBase = "/imagenes/";
+        this.rutaBase = obtieneParametroContext();
+    }
+    
+    /**
+     * Funcion con la cual obtengo la ruta base de sigemco para las aplicaciones
+     * @return 
+     */
+    public String obtieneParametroContext() {
+        String parametro = "";
+        try {
+           Context initCtx = new InitialContext();
+           String envCtx = (String) initCtx.lookup("java:comp/env/RutaBaseApp");
+            parametro = envCtx;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return parametro;
     }
     /**
      * Funcion con la cual guardo la imagen en el repositorio de imagenes
