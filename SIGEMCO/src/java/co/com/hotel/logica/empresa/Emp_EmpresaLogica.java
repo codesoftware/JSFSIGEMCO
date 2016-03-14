@@ -62,6 +62,10 @@ public class Emp_EmpresaLogica {
             if (!inserts.equalsIgnoreCase("Ok")) {
                 return inserts;
             }
+            inserts = this.ingresaPrefijoNumFacturacion(empresa.getPreffact());
+            if (!inserts.equalsIgnoreCase("Ok")) {
+                return inserts;
+            }
             rta = "Ok";
         } catch (Exception e) {
             System.out.println("Error Emp_EmpresaLogica.ingresarParametrosPrincempresa " + e);
@@ -520,7 +524,8 @@ public class Emp_EmpresaLogica {
             sql += "       (SELECT para_valor FROM em_tpara where UPPER(para_clave) = 'IVAPRVENTA') IVAPRVENTA, ";
             sql += "       (SELECT para_valor FROM em_tpara where UPPER(para_clave) = 'DEPEMPRESA') DEPEMPRESA, ";
             sql += "       (SELECT para_valor FROM em_tpara where UPPER(para_clave) = 'ACTECONO') ACTECONO, ";
-            sql += "       (SELECT para_valor FROM em_tpara where UPPER(para_clave) = 'CORREOFACT') CORREOFACT ";
+            sql += "       (SELECT para_valor FROM em_tpara where UPPER(para_clave) = 'CORREOFACT') CORREOFACT, ";
+            sql += "       (SELECT para_valor FROM em_tpara where UPPER(para_clave) = 'PRENUMFACT') PRENUMFACT ";
             rs = function.enviarSelect(sql);
             while (rs.next()) {
                 if (contador == 0) {
@@ -543,6 +548,7 @@ public class Emp_EmpresaLogica {
                 obj.setDepartamento(rs.getString("DEPEMPRESA"));
                 obj.setActEco(rs.getString("ACTECONO"));
                 obj.setCorreo(rs.getString("CORREOFACT"));
+                obj.setPreffact(rs.getString("PRENUMFACT"));
             }
         } catch (Exception e) {
             System.out.println("Error Emp_EmpresaLogica.obtieneDatosEmpresa " + e);
@@ -804,6 +810,46 @@ public class Emp_EmpresaLogica {
             System.err.println("Error Emp_EmpresaLogica.ingresaActCorreoFactura");
             e.printStackTrace();
             return "Error al insertar el nombre de la empresa: " + e;
+        } finally {
+            function.cerrarConexion();
+        }
+        return "Ok";
+    }
+    
+    /**
+     * Funcion con la cual ingreso el prefijo que saldra en la factura
+     *
+     * @param correo
+     * @return
+     */
+    private String ingresaPrefijoNumFacturacion(String prefijo) {
+        EnvioFunction function = new EnvioFunction();
+        ResultSet rs = null;
+        String select = "";
+        String sql = "";
+        int cont = 0;
+        try {
+            select += "select COUNT(*)  contador                \n";
+            select += "from em_tpara                            \n";
+            select += "where upper(para_clave) = 'PRENUMFACT'    \n";
+            rs = function.enviarSelect(select);
+            while (rs.next()) {
+                cont = rs.getInt("contador");
+            }
+            if (cont == 0) {
+                sql = "insert into em_tpara(para_clave, para_valor) \n";
+                sql += "values('PRENUMFACT', '" + prefijo + "')   \n";
+
+            } else {
+                sql = "UPDATE em_tpara                          \n";
+                sql += "SET para_valor = '" + prefijo + "'         \n";
+                sql += "WHERE upper(para_clave) = 'PRENUMFACT'\n";
+            }
+            function.enviarUpdate(sql);
+        } catch (Exception e) {
+            System.err.println("Error Emp_EmpresaLogica.ingresaPrefijoNumFacturacion");
+            e.printStackTrace();
+            return "Error al insertar el prefijo de facturacion de la empresa: " + e;
         } finally {
             function.cerrarConexion();
         }

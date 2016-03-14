@@ -24,6 +24,7 @@ public class Empresa {
     private String comisionReposicion;
     private String subcuentaBancos;
     private String resolucion;
+    private String preffact;
     private String departamento;
     private String actEco;
     private String correo;
@@ -154,5 +155,13 @@ public class Empresa {
 
     public void setCorreo(String correo) {
         this.correo = correo;
+    }
+
+    public String getPreffact() {
+        return preffact;
+    }
+
+    public void setPreffact(String preffact) {
+        this.preffact = preffact;
     }
 }

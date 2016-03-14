@@ -73,6 +73,10 @@
                                 <td><s:textfield cssClass="form-control" name="empresa.resolucion" maxLength="50"/></td>
                             </tr>
                             <tr>
+                                <td>Prefijo Facturacion: </td>
+                                <td><s:textfield cssClass="form-control" name="empresa.preffact" maxLength="50"/></td>
+                            </tr>
+                            <tr>
                                 <td>Direcci&oacute;n: </td>
                                 <td><s:textfield cssClass="form-control" name="empresa.direccion" maxLength="60"/></td>
                             </tr>
