@@ -28,6 +28,9 @@ public class LogoAction extends ActionSupport implements UsuarioHabilitado, Sess
     private File imagen;
     private String imagenFileName;
     private String imagenContentType;
+    private File imgLgFac;
+    private String imgLgFacFileName;
+    private String imgLgFacContentType;
 
     /**
      * Funcion con la cual se carga una imagen en el servidor para luego
@@ -46,6 +49,10 @@ public class LogoAction extends ActionSupport implements UsuarioHabilitado, Sess
                     LogoLogica logLogo = new LogoLogica();
                     valida = logLogo.guardaImagenRepositorio(imagen);
                     logLogo.guardaImagenServidor(logoServ);
+                }
+                if (imgLgFac != null){
+                    LogoLogica logLogo = new LogoLogica();
+                    valida = logLogo.guardaImagenFacturaRepositorio(imgLgFac);
                 }
                 if ("Ok".equalsIgnoreCase(valida)) {
                     addActionMessage("Imagen Guardada correctamente");
@@ -110,4 +117,28 @@ public class LogoAction extends ActionSupport implements UsuarioHabilitado, Sess
         this.imagenContentType = imagenContentType;
     }
 
+    public File getImgLgFac() {
+        return imgLgFac;
+    }
+
+    public void setImgLgFac(File imgLgFac) {
+        this.imgLgFac = imgLgFac;
+    }
+
+    public String getImgLgFacFileName() {
+        return imgLgFacFileName;
+    }
+
+    public void setImgLgFacFileName(String imgLgFacFileName) {
+        this.imgLgFacFileName = imgLgFacFileName;
+    }
+
+    public String getImgLgFacContentType() {
+        return imgLgFacContentType;
+    }
+
+    public void setImgLgFacContentType(String imgLgFacContentType) {
+        this.imgLgFacContentType = imgLgFacContentType;
+    }
+    
 }

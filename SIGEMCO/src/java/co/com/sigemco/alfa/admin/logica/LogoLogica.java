@@ -53,6 +53,21 @@ public class LogoLogica {
         }
         return rta;
     }
+    /**
+     * Funcion con la cual guardo la imagen en el repositorio de imagenes
+     * @return 
+     */
+    public String guardaImagenFacturaRepositorio(File file){
+        String rta = "Ok";
+        try {
+            File nuevoArchivo = new File(this.rutaBase+"logoFact.jpg");
+            FileUtils.copyFile(file, nuevoArchivo);
+        } catch (Exception e) {
+            e.printStackTrace();
+            rta = "Error "+ e;
+        }
+        return rta;
+    }
     
     /**
      * Funcion con la cual guardo la imagen en el repositorio de imagenes
@@ -69,9 +84,6 @@ public class LogoLogica {
         }
         return rta;
     }
-    
-    
-    
 
     public String getRutaBase() {
         return rutaBase;

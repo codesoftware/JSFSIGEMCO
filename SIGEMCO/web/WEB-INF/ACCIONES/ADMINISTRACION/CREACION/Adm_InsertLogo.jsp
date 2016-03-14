@@ -62,6 +62,12 @@
                                 </td>
                             </tr>
                             <tr>
+                                <td>Adjunte la imagen de su factura</td>
+                                <td>
+                                    <s:file name="imgLgFac" cssClass="form-control"/>
+                                </td>
+                            </tr>
+                            <tr>
                                 <td>Acronimo:</td>
                                 <td><s:textfield cssClass="form-control" name="acronimo"/></td>
                             </tr>
