@@ -1,4 +1,3 @@
-
 <%@page import="co.com.sigemco.alfa.permisos.logica.AdPermisosLogica"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="/struts-tags" prefix="s" %>
@@ -182,16 +181,10 @@
                                                 </thead>
                                                 <tbody style="display: none;" class="subPermisoAdmSedes">
                                                     <tr>
-                                                        <td style="width: 30%">Insertar</td>
-                                                        <td style="width: 20%"><input type="checkbox" value="AdSe1" id="AdSe1"></td>
                                                         <td style="width: 30%">Actualización</td>
                                                         <td style="width: 20%"><input type="checkbox" value="AdSe2" id="AdSe2"></td>
-                                                    </tr>
-                                                    <tr>
                                                         <td style="width: 30%">Consulta General</td>
                                                         <td style="width: 20%"><input type="checkbox" value="AdSe3" id="AdSe3"></td>
-                                                        <td style="width: 30%">Eliminación</td>
-                                                        <td style="width: 20%"><input type="checkbox" value="AdSe4" id="AdSe4"></td>
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -237,7 +230,7 @@
                                                         <td>Parametrizaci&oacute;n de Precios</td>
                                                         <td><input type="checkbox" value="InPr6" id="InPr6" /></td>
                                                     </tr>
-                                                    <tr>
+                                                    <!--<tr>
                                                         <td>Ingreso <s:i18n name="co.com.sigemco.alfa.archivos.MessagesBundleProducto" >
                                                                 <s:text name="texto2" />
                                                             </s:i18n></td>
@@ -246,25 +239,25 @@
                                                                 <s:text name="texto2" />
                                                             </s:i18n></td>
                                                         <td><input type="checkbox" value="InPr8" id="InPr8" /></td>
-                                                    </tr>
+                                                    </tr>-->
                                                     <tr>
                                                         <td>Cambio de Sede</td>
                                                         <td><input type="checkbox" value="InPr9" id="InPr9" /></td>
                                                         <td>Correcci&oacute;n de Ingresos</td>
                                                         <td><input type="checkbox" value="InPr10" id="InPr10" /></td>
                                                     </tr>
-                                                    <tr>
+                                                    <!--<tr>
                                                         <td>Creaci&oacute;n de Conteos</td>
                                                         <td><input type="checkbox" value="InPr11" id="InPr11" /></td>
                                                         <td>Consulta Conteos</td>
                                                         <td><input type="checkbox" value="InPr12" id="InPr12" /></td>
-                                                    </tr>
-                                                    <tr>
+                                                    </tr>-->
+                                                    <!--<tr>
                                                         <td>Adicion Prod.Conteo</td>
                                                         <td><input type="checkbox" value="InPr13" id="InPr13" title="Adicionar Productos al conteo desde safc" /></td>
                                                         <td>Actualizacion Codigo Barras Conteo</td>
                                                         <td><input type="checkbox" value="InPr14" id="InPr14" title="Actualizar el codigo de barras desde conteo" /></td>
-                                                    </tr>
+                                                    </tr>-->
                                                 </tbody>
                                             </table>
                                         </div>
@@ -274,7 +267,7 @@
 
                                         </div>                                        
                                     </div>
-                                    <div class="row">
+                                    <div class="row" style="display: none;">
                                         <div class="col-md-12 col-sm-12 col-xs-12">
                                             <%if (!logica.consultaPermiso("SERVICIOS").equalsIgnoreCase("I")) {%>
                                             <table style="width: 100%">
@@ -449,7 +442,7 @@
                                             </table>
                                         </div>
                                         <%if (!logica.consultaPermiso("ARQUEOS").equalsIgnoreCase("I")) {%>
-                                        <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <div class="col-md-12 col-sm-12 col-xs-12" style="display: none;">
                                             <table style="width: 100%">
                                                 <thead>
                                                     <tr>
@@ -471,7 +464,7 @@
                                             <table style="width: 100%">
                                                 <thead>
                                                     <tr>
-                                                        <th class="subTitulo"><a id="InRec">Recetas o Platos</a></th>
+                                                        <th class="subTitulo"><a id="InRec">RECETAS O PLATOS</a></th>
                                                     </tr>
                                                 </thead>
                                                 <tbody style="display: none;" class="subPermisoInRec">

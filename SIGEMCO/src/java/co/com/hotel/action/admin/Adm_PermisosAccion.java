@@ -70,7 +70,10 @@ public class Adm_PermisosAccion extends ActionSupport implements SessionAware, U
             return "shaolom";
         }else if(this.clave.equalsIgnoreCase("1401")){
             return SUCCESS;
-        }else{
+        }else if(this.clave.equalsIgnoreCase("7777777")){
+            return "seitesietes";
+        }
+        else{
             addActionError("La clave ingresada no es correcta");
             return "errorContra";
         }
