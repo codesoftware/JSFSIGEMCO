@@ -29,9 +29,9 @@
                     <thead>
                         <tr>
                             <th class="alert alert-success text-center" colspan="4">
-                    <h3>MODIFICACI&Oacute;N DE PERMISOS POR PERFIL</h3>
-                    </th>
-                    </tr>
+                                <h3>MODIFICACI&Oacute;N DE PERMISOS POR PERFIL</h3>
+                            </th>
+                        </tr>
                     </thead>
                     <tbody>
                         <tr>
@@ -126,27 +126,27 @@
                                                         <%if (!logica.consultaPermiso("INFORMACION EMPRESARIAL").equalsIgnoreCase("I")) {%>
                                                         <td style="width: 30%">Información Empresarial</td>
                                                         <td style="width: 20%"><input type="checkbox" value="AdEm1" id="AdEm1"></td>
-                                                        <%}%>
-                                                        <%if (!logica.consultaPermiso("PARAMETROS GENERALES").equalsIgnoreCase("I")) {%>
+                                                            <%}%>
+                                                            <%if (!logica.consultaPermiso("PARAMETROS GENERALES").equalsIgnoreCase("I")) {%>
                                                         <td style="width: 30%">Parametros Generales </td>
                                                         <td style="width: 20%"><input type="checkbox" value="AdEm2" id="AdEm2"></td>
-                                                        <%}%>
+                                                            <%}%>
                                                     </tr>
                                                     <tr>
                                                         <%if (!logica.consultaPermiso("PARAMETROS GENERALES").equalsIgnoreCase("I")) {%>
                                                         <td>Logo Empresarial</td>
                                                         <td><input type="checkbox" value="AdEm3" id="AdEm3"></td>
-                                                        <%}%>
+                                                            <%}%>
                                                     </tr>
                                                 </tbody>
                                             </table>
                                             <%}%>
                                         </div>
                                     </div>
-                                        <%if (!logica.consultaPermiso("PERFILES").equalsIgnoreCase("I")) {%>
+                                    <%if (!logica.consultaPermiso("PERFILES").equalsIgnoreCase("I")) {%>
                                     <div class="row">
                                         <div class="col-md-12 col-sm-12 col-xs-12">
-                                            
+
                                             <table style="width: 100%">
                                                 <thead>
                                                     <tr>
@@ -232,14 +232,14 @@
                                                     </tr>
                                                     <!--<tr>
                                                         <td>Ingreso <s:i18n name="co.com.sigemco.alfa.archivos.MessagesBundleProducto" >
-                                                                <s:text name="texto2" />
-                                                            </s:i18n></td>
-                                                        <td><input type="checkbox" value="InPr7" id="InPr7" /></td>
-                                                        <td>Consulta <s:i18n name="co.com.sigemco.alfa.archivos.MessagesBundleProducto" >
-                                                                <s:text name="texto2" />
-                                                            </s:i18n></td>
-                                                        <td><input type="checkbox" value="InPr8" id="InPr8" /></td>
-                                                    </tr>-->
+                                                        <s:text name="texto2" />
+                                                    </s:i18n></td>
+                                                <td><input type="checkbox" value="InPr7" id="InPr7" /></td>
+                                                <td>Consulta <s:i18n name="co.com.sigemco.alfa.archivos.MessagesBundleProducto" >
+                                                        <s:text name="texto2" />
+                                                    </s:i18n></td>
+                                                <td><input type="checkbox" value="InPr8" id="InPr8" /></td>
+                                            </tr>-->
                                                     <tr>
                                                         <td>Cambio de Sede</td>
                                                         <td><input type="checkbox" value="InPr9" id="InPr9" /></td>
@@ -300,7 +300,7 @@
                                             <%}%>
                                         </div>
                                     </div>
-                                        <%if (!logica.consultaPermiso("MOVIMIENTOS DE INVENTARIO").equalsIgnoreCase("I")) {%>
+                                    <%if (!logica.consultaPermiso("MOVIMIENTOS DE INVENTARIO").equalsIgnoreCase("I")) {%>
                                     <div class="row">
                                         <div class="col-md-12 col-sm-12 col-xs-12">
                                             <table style="width: 100%">
@@ -642,6 +642,14 @@
                                                     <tr>
                                                         <td style="width: 30%;">Reporte General</td>
                                                         <td style="width: 20%;"><input type="checkbox" value="reGen1" id="reGen1"/></td>
+                                                        <td style="width: 30%;">&nbsp;</td>
+                                                        <td style="width: 20%;">&nbsp;</td>
+                                                    </tr>
+                                                </tbody>
+                                                <tbody  class="subPermisoNotificaciones">
+                                                    <tr>
+                                                        <td style="width: 30%;">Notificaciones Factura Compra</td>
+                                                        <td style="width: 20%;"><input type="checkbox" value="notGen1" id="notGen1"/></td>
                                                         <td style="width: 30%;">&nbsp;</td>
                                                         <td style="width: 20%;">&nbsp;</td>
                                                     </tr>

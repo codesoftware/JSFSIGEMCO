@@ -672,6 +672,14 @@
                                                         <td style="width: 20%;">&nbsp;</td>
                                                     </tr>
                                                 </tbody>
+                                                 <tbody  class="subPermisoNotificaciones">
+                                                    <tr>
+                                                        <td style="width: 30%;">Notificaciones Factura Compra</td>
+                                                        <td style="width: 20%;"><input type="checkbox" value="notGen1" id="notGen1"/></td>
+                                                        <td style="width: 30%;">&nbsp;</td>
+                                                        <td style="width: 20%;">&nbsp;</td>
+                                                    </tr>
+                                                </tbody>
                                             </table>                                                                                        
                                         </div>                                        
                                     </div>

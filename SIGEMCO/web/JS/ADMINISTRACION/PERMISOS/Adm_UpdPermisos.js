@@ -53,6 +53,9 @@ $(function() {
     $("#InRec").click(function() {
         $(".subPermisoInRec").toggle("slow");
     });
+     $("#InRec").click(function() {
+        $(".subPermisoNotificaciones").toggle("slow");
+    });
 });
 
 function actualizar() {
@@ -153,6 +156,10 @@ function mostrarPermisos(valor) {
     var repUsua = valor.indexOf('RpUs');
     if (repUsua > 0) {
         $(".subPermisoRepUsua").show("slow");
+    }
+     var notCorr = valor.indexOf('notGen');
+     if (notCorr > 0) {
+        $(".subPermisoNotificaciones").show("slow");
     }
     var movCont = valor.indexOf('InMCo');
     if (movCont > 0) {
