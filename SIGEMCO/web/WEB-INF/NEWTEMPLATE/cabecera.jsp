@@ -6,7 +6,7 @@
 <link rel="icon" href="<%=RutaSitio%>/IMAGENES/logo.jpg" sizes="16x16">
 <script type="text/javascript" src="<%=RutaSitio%>/JS/CORE/JQUERY/jquery-2.1.0.js"></script>
 <script type="text/javascript" src="<%=RutaSitio%>/JS/CORE/BOOTSTRAP/bootstrap.min.js"></script>
-<script type="text/javascript" src="<%=RutaSitio%>/JS/CORE/DATEPICKER/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="<%=RutaSitio%>/JS/CORE/DATEPICKER/bootstrap-date.js"></script>
 <script type="text/javascript" src="<%=RutaSitio%>/JS/CORE/funciones.js"></script>
 <script type="text/javascript" src="<%=RutaSitio%>/JS/CORE/funcionesAjax.js"></script>
 <script type="text/javascript" src="<%=RutaSitio%>/JS/MENU/jquery.smartmenus.js"></script>

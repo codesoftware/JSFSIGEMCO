@@ -1,7 +1,6 @@
 $(function(){
     $('.input-group.date').datepicker({
-        format: 'dd/mm/yyyy',
-        todayHighlight: true
+        format: 'dd/mm/yyyy'
     });
 });
 function cleanForm(){

@@ -73,7 +73,7 @@
                                 <td>Fecha de Nacimiento: </td>
                                 <td style="width: 70%">
                                     <div class="input-group date" >
-                                        <s:textfield name="usuaNuevo.fechaNacimiento" cssClass="form-control" readonly="true"/>
+                                        <s:textfield name="usuaNuevo.fechaNacimiento" cssClass="form-control" readonly="true" data-date-format="dd/mm/yyyy"/>
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
                                     </div>
                                 </td>
